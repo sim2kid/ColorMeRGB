@@ -6,9 +6,9 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GameController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        // GET: api/<GameController>
+        // GET: api/<UsersController>
         [HttpGet]
         [Route("get-all/{id}")]
         public IEnumerable<string> Get()
@@ -16,7 +16,7 @@ namespace API.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<GameController>/5
+        // GET api/<UsersController>/5
         [HttpGet]
         [Route("get-by-id/{id}")]
         public string Get(int id)
@@ -24,22 +24,29 @@ namespace API.Controllers
             return "value";
         }
 
-        // GET api/<GameController>/5
+        // GET api/<UsersController>/5
         [HttpGet]
-        [Route("get-by-user-id/{userId}")]
+        [Route("get-by-user/{userName}")]
         public string Get(string userName)
         {
             return "value";
         }
 
-        // POST api/<GameController>
+        // POST api/<UsersController>
         [HttpPost]
         [Route("insert-records")]
         public void Post([FromBody] string value)
         {
         }
 
-        // DELETE api/<GameController>/5
+        // PUT api/<UsersController>/5
+        [HttpPut]
+        [Route("update-by-id/{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/<UsersController>/5
         [HttpDelete]
         [Route("delete-by-id/{id}")]
         public void Delete(int id)
