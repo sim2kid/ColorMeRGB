@@ -1,35 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Services.Data_Access_Layers;
+using Services.Models;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace API.Controllers
+namespace API.Test_Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class GameController : ControllerBase
     {
+        private GamesDataAccessLayer dataService = new GamesDataAccessLayer();
+
         // GET: api/<GameController>
         [HttpGet]
-        [Route("get-all/{id}")]
-        public IEnumerable<string> Get()
+        [Route("get-all")]
+        public IEnumerable<GameRecordModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return dataService.GamesGetAll();
         }
 
         // GET api/<GameController>/5
         [HttpGet]
         [Route("get-by-id/{id}")]
-        public string Get(int id)
+        public IEnumerable<GameRecordModel> GetId(Guid id)
         {
-            return "value";
+            return dataService.GamesGetById(id);
         }
 
         // GET api/<GameController>/5
         [HttpGet]
         [Route("get-by-user-id/{userId}")]
-        public string Get(string userName)
+        public IEnumerable<GameRecordModel> GetUserId(Guid userId)
         {
-            return "value";
+            return dataService.GamesGetByUserId(userId);
         }
 
         // POST api/<GameController>
@@ -42,8 +47,9 @@ namespace API.Controllers
         // DELETE api/<GameController>/5
         [HttpDelete]
         [Route("delete-by-id/{id}")]
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
+            dataService.GamesDeleteByID(id);
         }
     }
 }

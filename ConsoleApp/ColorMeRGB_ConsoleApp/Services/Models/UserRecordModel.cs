@@ -14,7 +14,7 @@ namespace Services.Models
     public class UserRecordModel
     {
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonPropertyName("username")]
         public string Username { get; set; }

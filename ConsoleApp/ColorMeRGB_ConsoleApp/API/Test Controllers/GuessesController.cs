@@ -2,13 +2,13 @@
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace API.Controllers
+namespace API.Test_Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class GuessesController : ControllerBase
     {
-        // GET: api/<UsersController>
+        // GET: api/<GuessesController>
         [HttpGet]
         [Route("get-all/{id}")]
         public IEnumerable<string> Get()
@@ -16,7 +16,7 @@ namespace API.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<UsersController>/5
+        // GET api/<GuessesController>/5
         [HttpGet]
         [Route("get-by-id/{id}")]
         public string Get(int id)
@@ -24,29 +24,22 @@ namespace API.Controllers
             return "value";
         }
 
-        // GET api/<UsersController>/5
+        // GET api/<GuessesController>/5
         [HttpGet]
-        [Route("get-by-user/{userName}")]
+        [Route("get-by-game-id/{gameId}")]
         public string Get(string userName)
         {
             return "value";
         }
 
-        // POST api/<UsersController>
+        // POST api/<GuessesController>
         [HttpPost]
         [Route("insert-records")]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<UsersController>/5
-        [HttpPut]
-        [Route("update-by-id/{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<UsersController>/5
+        // DELETE api/<GuessesController>/5
         [HttpDelete]
         [Route("delete-by-id/{id}")]
         public void Delete(int id)

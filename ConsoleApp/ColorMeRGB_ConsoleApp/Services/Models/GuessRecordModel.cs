@@ -14,10 +14,10 @@ namespace Services.Models
     public class GuessRecordModel
     {
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonPropertyName("game_id")]
-        public int GameId { get; set; }
+        public Guid GameId { get; set; }
 
         [JsonPropertyName("answer")]
         public int Answer { get; set; }
