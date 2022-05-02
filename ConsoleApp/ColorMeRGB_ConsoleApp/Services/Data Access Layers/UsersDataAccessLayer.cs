@@ -20,9 +20,9 @@ namespace Services.Data_Access_Layers
         }
         
         /// <summary>
-        /// Get all rows in the Games table
+        /// Get all rows in the Users table
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of all the rows</returns>
         public List<UserRecordModel> UsersGetAll()
         {
             //List to store the rows that are retrieved by this stored procedure
@@ -61,7 +61,7 @@ namespace Services.Data_Access_Layers
         /// Get the row corresponding to passed in ID (good for testing update)
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>List of all the rows corresponding to ID</returns>
         public List<UserRecordModel> UsersGetById(Guid id)
         {
             List<UserRecordModel> statList = new List<UserRecordModel>();
@@ -95,10 +95,10 @@ namespace Services.Data_Access_Layers
         }
 
         /// <summary>
-        /// Get the row corresponding to passed in ID (good for testing update)
+        /// Get the row corresponding to passed in username
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="username"></param>
+        /// <returns>List of all the rows corresponding to username</returns>
         public List<UserRecordModel> UsersGetByUserName(string username)
         {
             List<UserRecordModel> statList = new List<UserRecordModel>();
@@ -135,7 +135,7 @@ namespace Services.Data_Access_Layers
         /// Delete the row with corresponding "id" parameter
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>string that declares success or failure</returns>
         public string UsersDeleteByID(Guid id)
         {
             //Make sure we reference the proper connection

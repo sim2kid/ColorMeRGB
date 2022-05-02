@@ -23,7 +23,7 @@ namespace Services.Data_Access_Layers
         /// <summary>
         /// Get all rows in the Games table
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of all rows</returns>
         public List<GameRecordModel> GamesGetAll()
         {
             //List to store the rows that are retrieved by this stored procedure
@@ -62,7 +62,7 @@ namespace Services.Data_Access_Layers
         /// Get the row corresponding to passed in ID (good for testing update)
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>List of all rows corresponding to ID</returns>
         public List<GameRecordModel> GamesGetById(Guid id)
         {
             List<GameRecordModel> statList = new List<GameRecordModel>();
@@ -96,10 +96,10 @@ namespace Services.Data_Access_Layers
         }
 
         /// <summary>
-        /// Get the row corresponding to passed in ID (good for testing update)
+        /// Get the row corresponding to passed in User ID (good for testing update)
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>List of all rows corresponding to User ID</returns>
         public List<GameRecordModel> GamesGetByUserId(Guid id)
         {
             List<GameRecordModel> statList = new List<GameRecordModel>();
@@ -136,7 +136,7 @@ namespace Services.Data_Access_Layers
         /// Delete the row with corresponding "id" parameter
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>String that declares failure or success</returns>
         public string GamesDeleteByID(Guid id)
         {
             //Make sure we reference the proper connection

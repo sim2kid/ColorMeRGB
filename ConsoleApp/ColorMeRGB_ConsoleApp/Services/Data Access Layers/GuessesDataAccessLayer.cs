@@ -20,9 +20,9 @@ namespace Services.Data_Access_Layers
         }
 
         /// <summary>
-        /// Get all rows in the Games table
+        /// Get all rows in the Guesses table
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of all rows</returns>
         public List<GuessRecordModel> GuessesGetAll()
         {
             //List to store the rows that are retrieved by this stored procedure
@@ -61,7 +61,7 @@ namespace Services.Data_Access_Layers
         /// Get the row corresponding to passed in ID (good for testing update)
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>List of all rows corresponding to ID</returns>
         public List<GuessRecordModel> GuessesGetById(Guid id)
         {
             List<GuessRecordModel> statList = new List<GuessRecordModel>();
@@ -98,7 +98,7 @@ namespace Services.Data_Access_Layers
         /// Get the row corresponding to passed in ID (good for testing update)
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>List of all rows corresponding to Game ID</returns>
         public List<GuessRecordModel> GuessessGetByGameId(Guid id)
         {
             List<GuessRecordModel> statList = new List<GuessRecordModel>();
@@ -135,7 +135,7 @@ namespace Services.Data_Access_Layers
         /// Delete the row with corresponding "id" parameter
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>String that declares failure or success</returns>
         public string GuessesDeleteByID(Guid id)
         {
             //Make sure we reference the proper connection
