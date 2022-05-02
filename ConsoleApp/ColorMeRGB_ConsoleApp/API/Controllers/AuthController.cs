@@ -43,7 +43,7 @@ namespace API.Controllers
             // Catch if model fails to save.
 
             // Generate JWE token
-
+            Services.Utilities.JwtUtil.GenerateToken();
             // Return token.
             return Ok(new
             {
