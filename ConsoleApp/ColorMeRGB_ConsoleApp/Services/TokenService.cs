@@ -45,7 +45,7 @@ namespace Services
         }
         private Dictionary<string, string> DecryptToken(string jwt)
         {
-
+            var token = new JwtSecurityTokenHandler().ReadJwtToken(jwt);
         }
 
         private bool isValid(string token) 
