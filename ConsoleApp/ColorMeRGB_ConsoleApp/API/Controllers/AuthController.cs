@@ -10,19 +10,60 @@ namespace API.Controllers
     {
         [HttpPost]
         [Route("Signup")]
-        public object Signup([FromBody] AuthModel model) 
+        public IActionResult Signup([FromBody] AuthModel auth) 
         {
+            UserModel model = new UserModel();
+            model.Username = auth.Username;
+            model.SignupTime = DateTime.Now;
+            model.Id = Guid.NewGuid();
+
+            // Ensure username doesn't already exist
             string username = model.Username;
-            string password = model.Password;
+            // TODO: Check Database for Username. If exists, fail signup. If doesn't exist, continue with signup
+            // If username exists, cancel request
+            if (false) 
+            {
+                return BadRequest(new 
+                {
+                    message = "Username already exists."
+                });
+            }
 
-            string hash = Services.Utilities.HashUtil.HashPassword(password, 5);
+            // Generate Salt
+            string salt = Services.Utilities.HashUtil.GenerateSalt();
+            model.Salt = salt;
 
-            return new
+            // Generate hashed password
+            string unHashedPassword = auth.Password;
+            string hash = Services.Utilities.HashUtil.HashPassword(unHashedPassword, salt, model.SignupTime);
+            model.Password = hash;
+
+            // Save model to database
+            // TODO: Save model to database
+            // Catch if model fails to save.
+
+            // Generate JWE token
+
+            // Return token.
+            return Ok(new
             {
                 authToken = "",
                 hash = hash,
                 username = username
+            });
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public object Login([FromBody] AuthModel model)
+        {
+            string username = model.Username;
+            string password = model.Password;
+
+            return new
+            {
+                authToken = ""
             };
-        } 
+        }
     }
 }
