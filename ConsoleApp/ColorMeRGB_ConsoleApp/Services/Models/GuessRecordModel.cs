@@ -19,13 +19,16 @@ namespace Services.Models
         [JsonPropertyName("game_id")]
         public Guid GameId { get; set; }
 
-        [JsonPropertyName("answer")]
-        public int Answer { get; set; }
+        [JsonPropertyName("guess_color")]
+        public string Guess { get; set; }
 
-        [JsonPropertyName("guess")]
-        public int Guess { get; set; }
+        [JsonPropertyName("timestamp")]
+        public DateTime Timestamp { get; set; }
 
         [JsonPropertyName("distance")]
         public float Distance { get; set; }
+
+        [JsonPropertyName("is_correct")]
+        public bool IsCorrect { get; set; }
     }
 }

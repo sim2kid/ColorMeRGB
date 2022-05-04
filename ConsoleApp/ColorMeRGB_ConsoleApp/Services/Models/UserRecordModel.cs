@@ -23,6 +23,9 @@ namespace Services.Models
         public string Password { get; set; }
 
         [JsonPropertyName("salt")]
-        public int Salt { get; set; }
+        public string Salt { get; set; }
+
+        [JsonPropertyName("signup_time")]
+        public DateTime SignupTime { get; set; }
     }
 }

@@ -40,8 +40,9 @@ namespace API.Test_Controllers
         // POST api/<GameController>
         [HttpPost]
         [Route("insert-records")]
-        public void Post([FromBody] string value)
+        public Guid Post([FromBody] GameRecordModel model)
         {
+           return dataService.GamesInsertRecords(model);
         }
 
         // DELETE api/<GameController>/5

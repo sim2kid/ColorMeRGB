@@ -19,6 +19,35 @@ namespace Services.Data_Access_Layers
             this.sqlConnectString = connectionSingleton.PrepareDBConnection();
         }
 
+        public Guid GuessesInsertRecords(GuessRecordModel record)
+        {
+            //Make sure we reference the proper connection
+            using (SqlConnection conn = new SqlConnection(sqlConnectString))
+            {
+                //Use this to reference the Stored Proceure that we are using for this operation
+                using (SqlCommand sqlCommand = new SqlCommand("[dbo].[GuessesInsertRecords]", conn))
+                {
+                    //Specify the interpretation of the command string
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    //Pass the proper values into the parameters of the stored procedure
+                    sqlCommand.Parameters.AddWithValue("@GuessColor", record.Guess).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.AddWithValue("@Distance", record.Distance).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.AddWithValue("@Timestamp", record.Timestamp).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.AddWithValue("@IsCorrect", record.IsCorrect).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.Add("@ReturnValue", SqlDbType.UniqueIdentifier).Direction = ParameterDirection.Output;
+
+
+                    conn.Open(); //open the connection with the previously established reference
+                    sqlCommand.ExecuteNonQuery(); //execute the stored procedure
+                    var result = (Guid)sqlCommand.Parameters["@ReturnValue"].Value; //return the id of the row that was inserted
+                    conn.Close(); //close the connection
+                    return result;
+
+                }
+            }
+        }
+
         /// <summary>
         /// Get all rows in the Guesses table
         /// </summary>
@@ -166,9 +195,10 @@ namespace Services.Data_Access_Layers
 
             model.Id = (Guid)result["id"];
             model.GameId = (Guid)result["game_id"];
-            model.Answer = (int)result["answer"];
-            model.Guess = (int)result["guess"];
+            model.Guess = (string)result["guess_color"];
             model.Distance = (float)result["distance"];
+            model.Timestamp = (DateTime)result["timestamp"];
+            model.IsCorrect = (bool)result["is_correct"];
 
             return model;
         }

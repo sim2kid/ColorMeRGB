@@ -22,6 +22,9 @@ namespace Services.Models
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
 
+        [JsonPropertyName("answer_color")]
+        public string? Answer { get; set; }
+
         [JsonPropertyName("completed")]
         public bool Completed { get; set; }
     }

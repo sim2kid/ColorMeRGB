@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Services.Data_Access_Layers;
+using Services.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +10,8 @@ namespace API.Test_Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private UsersDataAccessLayer dataService = new UsersDataAccessLayer();
+
         // GET: api/<UsersController>
         [HttpGet]
         [Route("get-all/{id}")]
@@ -35,8 +39,9 @@ namespace API.Test_Controllers
         // POST api/<UsersController>
         [HttpPost]
         [Route("insert-records")]
-        public void Post([FromBody] string value)
+        public Guid Post([FromBody] UserRecordModel model)
         {
+            return dataService.UsersInsertRecords(model);
         }
 
         // PUT api/<UsersController>/5

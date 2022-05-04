@@ -21,6 +21,40 @@ namespace Services.Data_Access_Layers
         }
 
         /// <summary>
+        /// Insert a record into the table
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        public Guid GamesInsertRecords(GameRecordModel record)
+        {
+            //Make sure we reference the proper connection
+            using (SqlConnection conn = new SqlConnection(sqlConnectString))
+            {
+                //Use this to reference the Stored Proceure that we are using for this operation
+                using (SqlCommand sqlCommand = new SqlCommand("[dbo].[GamesInsertRecords]", conn))
+                {
+                    //Specify the interpretation of the command string
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    //Pass the proper values into the parameters of the stored procedure
+                    sqlCommand.Parameters.AddWithValue("@UserID", record.UserId).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.AddWithValue("@AnswerColor", record.Answer).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.AddWithValue("@Timestamp", record.Timestamp).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.AddWithValue("@Completed", record.Completed).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.Add("@ReturnValue", SqlDbType.UniqueIdentifier).Direction = ParameterDirection.Output;
+
+
+                    conn.Open(); //open the connection with the previously established reference
+                    sqlCommand.ExecuteNonQuery(); //execute the stored procedure
+                    var result = (Guid)sqlCommand.Parameters["@ReturnValue"].Value; //return the id of the row that was inserted
+                    conn.Close(); //close the connection
+                    return result;
+
+                }
+            }
+        }
+
+        /// <summary>
         /// Get all rows in the Games table
         /// </summary>
         /// <returns>List of all rows</returns>
@@ -168,6 +202,7 @@ namespace Services.Data_Access_Layers
             model.Id = (Guid)result["id"];
             model.UserId = (Guid)result["user_id"];
             model.Timestamp = (DateTime)result["timestamp"];
+            model.Answer = (string?)result["answer_color"];
             model.Completed = (bool)result["completed"];
 
             return model;
