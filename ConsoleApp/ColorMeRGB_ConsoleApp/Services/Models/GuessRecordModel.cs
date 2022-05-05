@@ -20,7 +20,7 @@ namespace Services.Models
         public Guid GameId { get; set; }
 
         [JsonPropertyName("guess_color")]
-        public string Guess { get; set; }
+        public string? Guess { get; set; }
 
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }

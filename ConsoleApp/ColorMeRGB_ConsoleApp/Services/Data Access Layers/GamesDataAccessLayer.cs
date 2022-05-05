@@ -195,6 +195,37 @@ namespace Services.Data_Access_Layers
             }
         }
 
+        /// <summary>
+        /// Update a row that corresponds to the passed in id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        public string GamesUpdateRecordById(Guid id, GameRecordModel record)
+        {
+            //Make sure we reference the proper connection
+            using (SqlConnection conn = new SqlConnection(sqlConnectString))
+            {
+                //Use this to reference the Stored Proceure that we are using for this operation
+                using (SqlCommand sqlCommand = new SqlCommand("[dbo].[GamesUpdateRecordById]", conn))
+                {
+                    //Specify the interpretation of the command string
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    //Pass the proper values into the parameters of the stored procedure
+                    sqlCommand.Parameters.AddWithValue("@AnswerColor", record.Answer).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.AddWithValue("@Timestamp", record.Timestamp).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.AddWithValue("@Completed", record.Completed).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.AddWithValue("@GuessID", id).Direction = ParameterDirection.Input;
+
+                    conn.Open(); //open the connection with the previously established reference
+                    string result = sqlCommand.ExecuteNonQuery() == 0 ? $"Update {id} Failed" : $"Update {id} Success"; //Respond as to whether the update failed or succeeded
+                    conn.Close(); //close the connection
+                    return result;
+                }
+            }
+        }
+
         private GameRecordModel MapToModel(SqlDataReader? result)
         {
             GameRecordModel model = new GameRecordModel();

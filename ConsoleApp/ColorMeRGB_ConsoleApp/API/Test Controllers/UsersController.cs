@@ -14,26 +14,26 @@ namespace API.Test_Controllers
 
         // GET: api/<UsersController>
         [HttpGet]
-        [Route("get-all/{id}")]
-        public IEnumerable<string> Get()
+        [Route("get-all")]
+        public IEnumerable<UserRecordModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return dataService.UsersGetAll();
         }
 
         // GET api/<UsersController>/5
         [HttpGet]
         [Route("get-by-id/{id}")]
-        public string Get(int id)
+        public IEnumerable<UserRecordModel> Get(Guid id)
         {
-            return "value";
+            return dataService.UsersGetById(id);
         }
 
         // GET api/<UsersController>/5
         [HttpGet]
         [Route("get-by-user/{userName}")]
-        public string Get(string userName)
+        public IEnumerable<UserRecordModel> Get(string userName)
         {
-            return "value";
+            return dataService.UsersGetByUserName(userName);
         }
 
         // POST api/<UsersController>
@@ -47,15 +47,17 @@ namespace API.Test_Controllers
         // PUT api/<UsersController>/5
         [HttpPut]
         [Route("update-by-id/{id}")]
-        public void Put(int id, [FromBody] string value)
+        public string Put(Guid id, [FromBody] UserRecordModel model)
         {
+            return dataService.UsersUpdateRecordById(id, model);
         }
 
         // DELETE api/<UsersController>/5
         [HttpDelete]
         [Route("delete-by-id/{id}")]
-        public void Delete(int id)
+        public string Delete(Guid id)
         {
+            return dataService.UsersDeleteByID(id);
         }
     }
 }

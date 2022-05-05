@@ -45,12 +45,20 @@ namespace API.Test_Controllers
            return dataService.GamesInsertRecords(model);
         }
 
+        // PUT api/<GamesController>/5
+        [HttpPut]
+        [Route("update-by-id/{id}")]
+        public string Put(Guid id, [FromBody] GameRecordModel model)
+        {
+            return dataService.GamesUpdateRecordById(id, model);
+        }
+
         // DELETE api/<GameController>/5
         [HttpDelete]
         [Route("delete-by-id/{id}")]
-        public void Delete(Guid id)
+        public string Delete(Guid id)
         {
-            dataService.GamesDeleteByID(id);
+            return dataService.GamesDeleteByID(id);
         }
     }
 }

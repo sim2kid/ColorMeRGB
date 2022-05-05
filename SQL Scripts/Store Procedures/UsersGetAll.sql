@@ -1,7 +1,7 @@
 USE [ColorMeRGB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[UsersGetAll]    Script Date: 5/3/2022 10:36:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[UsersGetAll]    Script Date: 5/4/2022 8:30:07 PM ******/
 SET ANSI_NULLS ON
 GO
 
