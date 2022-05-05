@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Services;
 
 namespace API.Controllers
 {
@@ -8,7 +9,15 @@ namespace API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        [HttpPost]
+        TokenService tokenService;
+
+        public AuthController() 
+        {
+            tokenService = new TokenService();
+        }
+    
+
+            [HttpPost]
         [Route("Signup")]
         public IActionResult Signup([FromBody] AuthModel auth) 
         {
@@ -34,8 +43,8 @@ namespace API.Controllers
             model.Salt = salt;
 
             // Generate hashed password
-            string unHashedPassword = auth.Password;
-            string hash = Services.Utilities.HashUtil.HashPassword(unHashedPassword, salt, model.SignupTime);
+            string preHashedPassword = auth.Password;
+            string hash = Services.Utilities.HashUtil.HashPassword(preHashedPassword, salt);
             model.Password = hash;
 
             // Save model to database
@@ -43,13 +52,11 @@ namespace API.Controllers
             // Catch if model fails to save.
 
             // Generate JWE token
-            Services.Utilities.JwtUtil.GenerateToken();
+            var token = tokenService.GenerateToken(model.Id);
             // Return token.
             return Ok(new
             {
-                authToken = "",
-                hash = hash,
-                username = username
+                authToken = token
             });
         }
 

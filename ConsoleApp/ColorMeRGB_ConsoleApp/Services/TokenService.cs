@@ -19,13 +19,29 @@ namespace Services
             return token;
         }
 
-        public Guid? GetUserId(string token) 
+        public bool IsTokenValid(string token) 
         {
-            if (!isValid(token)) 
+            var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
+
+            var now = DateTime.Now;
+
+            if (jwt.ValidFrom > now || jwt.ValidTo < now) 
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public Guid? GetUserId(string token)
+        {
+            if (!isValid(token))
             {
                 return null;
             }
-            Dictionary<string, string> claims = DecryptToken(token);
+
+            var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
+
+            Dictionary<string, string> claims = GetTokenClaims(jwt);
             string id = claims["uuid"];
             return Guid.Parse(id);
         }
@@ -37,15 +53,23 @@ namespace Services
 
             var token = new JwtSecurityToken(
                 expires: DateTime.Now.AddDays(7),
+                notBefore: DateTime.Now.AddHours(-1),
                 claims: customPayload,
                 signingCredentials: signingCreds
             );
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             return jwt;
         }
-        private Dictionary<string, string> DecryptToken(string jwt)
+        private Dictionary<string, string> GetTokenClaims(JwtSecurityToken token)
         {
-            var token = new JwtSecurityTokenHandler().ReadJwtToken(jwt);
+            Dictionary<string, string> claims = new Dictionary<string, string>();
+
+            foreach (var claim in token.Claims) 
+            {
+                claims.Add(claim.Type, claim.Value);
+            }
+
+            return claims;
         }
 
         private bool isValid(string token) 
@@ -54,8 +78,8 @@ namespace Services
         } 
         private static byte[] SecretKey()
         {
-            // TODO: Generate and access secret key via this method
-            string rawKey = "Secret Key";
+            // hardcoded secret key. Would normally be a file on the system and not saved
+            string rawKey = @"=-*[B[4M5_vWU`wYM&U!\C""y_'-&YW#e^(zye$3b,;3;F%!](^6\?YmD_PMcB+Nc7yT:R>;T'M+c`gSq%E^Z:pT9<4xyAWbPB*W+=MfM6Yw~}5B9Zb5@)s-*-YGnD4NT";
             return Encoding.UTF8.GetBytes(rawKey);
         }
     }
