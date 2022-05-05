@@ -6,6 +6,8 @@ using Services.Models;
 
 namespace API.Test_Controllers
 {
+    //Author: Sebastian Pedersen
+    //Date Created: April 29, 2022
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
