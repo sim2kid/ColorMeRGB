@@ -13,24 +13,11 @@ namespace Services.Utilities
         private static readonly char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
         private static readonly Random random = new Random();
 
-        public static string HashPassword(string password, string salt, DateTime accountCreationTime) 
+        public static string HashPassword(string password, string salt) 
         {
-            int reps = GenerateReps(accountCreationTime);
-            return HashPassword(password + salt, reps);
-        }
-
-        private static string HashPassword(string passwordSalt, int reps = 1) 
-        {
-            if (reps < 1)
-            {
-                reps = 1;
-            }
-            byte[] byteword = Encoding.Unicode.GetBytes(passwordSalt);
+            byte[] byteword = Encoding.Unicode.GetBytes(password + salt);
             SHA512 sha512 = SHA512.Create();
-            for (int i = 0; i < reps; i++) 
-            {
-                byteword = sha512.ComputeHash(byteword);
-            }
+            byteword = sha512.ComputeHash(byteword);
 
             StringBuilder result = new StringBuilder();
             foreach (byte b in byteword) 
@@ -40,10 +27,9 @@ namespace Services.Utilities
             return result.ToString();
         }
 
-        public static bool CheckPassword(string hashedPassword, string password, string salt, DateTime accountCreationTime) 
+        public static bool CheckPassword(string hashedPassword, string password, string salt) 
         {
-            int reps = GenerateReps(accountCreationTime);
-            string hash = HashPassword(password + salt, reps);
+            string hash = HashPassword(password, salt);
             return hashedPassword.Equals(hash);
         }
 
@@ -55,12 +41,6 @@ namespace Services.Utilities
                 sb.Append(chars[random.Next(0, chars.Length)]);
             }
             return sb.ToString();
-        }
-
-        private static int GenerateReps(DateTime timeSeed) 
-        {
-            Random r = new Random((int)(timeSeed.Ticks / TimeSpan.TicksPerMillisecond));
-            return r.Next() % 50;
         }
     }
 }

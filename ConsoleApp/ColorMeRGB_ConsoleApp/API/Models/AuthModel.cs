@@ -9,5 +9,8 @@ namespace API.Models
 
         [JsonPropertyName("password")]
         public string Password { get; set; }
+
+        [JsonPropertyName("api_key")]
+        public string ApiKey { get; set; }
     }
 }
