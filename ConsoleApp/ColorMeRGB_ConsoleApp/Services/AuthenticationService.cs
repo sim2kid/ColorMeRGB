@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Written by Owen Ravelo
+
 namespace Services
 {
     public class AuthenticationService

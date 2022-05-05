@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Text;
 
+// Written by Owen Ravelo
+
 namespace Services.Utilities
 {
     public static class HashUtil

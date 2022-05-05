@@ -7,6 +7,8 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 
+// Written by Owen Ravelo
+
 namespace Services
 {
     public class TokenService
