@@ -207,7 +207,7 @@ namespace Services.Data_Access_Layers
             using (SqlConnection conn = new SqlConnection(sqlConnectString))
             {
                 //Use this to reference the Stored Proceure that we are using for this operation
-                using (SqlCommand sqlCommand = new SqlCommand("[dbo].[GamesUpdateRecordById]", conn))
+                using (SqlCommand sqlCommand = new SqlCommand("[dbo].[GamesUpdateById]", conn))
                 {
                     //Specify the interpretation of the command string
                     sqlCommand.CommandType = CommandType.StoredProcedure;
@@ -216,7 +216,7 @@ namespace Services.Data_Access_Layers
                     sqlCommand.Parameters.AddWithValue("@AnswerColor", record.Answer).Direction = ParameterDirection.Input;
                     sqlCommand.Parameters.AddWithValue("@Timestamp", record.Timestamp).Direction = ParameterDirection.Input;
                     sqlCommand.Parameters.AddWithValue("@Completed", record.Completed).Direction = ParameterDirection.Input;
-                    sqlCommand.Parameters.AddWithValue("@GuessID", id).Direction = ParameterDirection.Input;
+                    sqlCommand.Parameters.AddWithValue("@GameID", id).Direction = ParameterDirection.Input;
 
                     conn.Open(); //open the connection with the previously established reference
                     string result = sqlCommand.ExecuteNonQuery() == 0 ? $"Update {id} Failed" : $"Update {id} Success"; //Respond as to whether the update failed or succeeded

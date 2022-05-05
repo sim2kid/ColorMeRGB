@@ -21,7 +21,7 @@ namespace Services
             return token;
         }
 
-        public bool IsTokenValid(string token) 
+        public bool TokenIsValid(string token) 
         {
             var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
 
@@ -36,7 +36,7 @@ namespace Services
 
         public Guid? GetUserId(string token)
         {
-            if (!isValid(token))
+            if (!TokenIsValid(token))
             {
                 return null;
             }
@@ -55,7 +55,7 @@ namespace Services
 
             var token = new JwtSecurityToken(
                 expires: DateTime.Now.AddDays(7),
-                notBefore: DateTime.Now.AddHours(-1),
+                notBefore: DateTime.Now.AddDays(-1),
                 claims: customPayload,
                 signingCredentials: signingCreds
             );
@@ -74,10 +74,6 @@ namespace Services
             return claims;
         }
 
-        private bool isValid(string token) 
-        {
-            return true;
-        } 
         private static byte[] SecretKey()
         {
             // hardcoded secret key. Would normally be a file on the system and not saved
