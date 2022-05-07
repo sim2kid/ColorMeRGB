@@ -59,12 +59,12 @@ namespace API.Controllers
             }
 
             List<GameModel> games = history.GetUsersGames(user.Value);
-            return BadRequest(new HistoryResponseModel()
+            return Ok(new HistoryResponseModel()
             {
                 Message = "Games grabbed successfully.",
                 Authorized = true,
                 Authenticated = true,
-                Success = false,
+                Success = true,
                 Games = games
             });
 

@@ -230,7 +230,7 @@ namespace Services.Data_Access_Layers
             model.Id = (Guid)result["id"];
             model.GameId = (Guid)result["game_id"];
             model.Guess = (string)result["guess_color"];
-            model.Distance = (float)result["distance"];
+            model.Distance = (float)(double)result["distance"];
             model.Timestamp = (DateTime)result["timestamp"];
             model.IsCorrect = (bool)result["is_correct"];
 

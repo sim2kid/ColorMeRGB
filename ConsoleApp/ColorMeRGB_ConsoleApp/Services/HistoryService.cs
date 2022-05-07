@@ -24,8 +24,11 @@ namespace Services
                 foreach (var answer in answerRecords) {
                     model.Answers.Add(new AnswerModel(answer));
                 }
+
+                model.Answers.Sort((x, y) => -x.Timestamp.CompareTo(y.Timestamp));
                 result.Add(model);
             }
+            result.Sort((x, y) => -x.Timestamp.CompareTo(y.Timestamp));
             return result;
         }
     }

@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 // Written by Owen Ravelo
 namespace Services.Models
 {
     public class AnswerModel
     {
-        [JsonProperty("timestampe")]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
 
-        [JsonProperty("guess_color")]
+        [JsonPropertyName("guess_color")]
         public string GuessColor { get; set; } = string.Empty;
 
-        [JsonProperty("distance")]
+        [JsonPropertyName("distance")]
         public float Distance { get; set; }
 
-        [JsonProperty("is_correct")]
+        [JsonPropertyName("is_correct")]
         public bool IsCorrect { get; set; }
 
         public AnswerModel() { }

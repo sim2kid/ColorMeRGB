@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using Services.Models;
 
 // Written by Owen Ravelo
@@ -6,19 +6,19 @@ namespace API.Models
 {
     public class HistoryResponseModel
     {
-        [JsonProperty("message")]
+        [JsonPropertyName("message")]
         public string Message { get; set; } = string.Empty;
 
-        [JsonProperty("authenticated")]
+        [JsonPropertyName("authenticated")]
         public bool Authenticated { get; set; }
 
-        [JsonProperty("authorized")]
+        [JsonPropertyName("authorized")]
         public bool Authorized { get; set; }
 
-        [JsonProperty("success")]
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
 
-        [JsonProperty("games")]
+        [JsonPropertyName("games")]
         public List<GameModel> Games { get; set; } = new List<GameModel>();
     }
 }

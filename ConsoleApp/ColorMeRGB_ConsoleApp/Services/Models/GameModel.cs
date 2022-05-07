@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 // Written by Owen Ravelo
 namespace Services.Models
@@ -7,16 +7,16 @@ namespace Services.Models
     {
         [JsonIgnore]
         public Guid Id { get; set; }
-        [JsonProperty("timestamp")]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
 
-        [JsonProperty("correct_answer")]
+        [JsonPropertyName("correct_answer")]
         public string CorrectAnswer { get; set; } = string.Empty;
 
-        [JsonProperty("completed")]
+        [JsonPropertyName("completed")]
         public bool Completed { get; set; }
 
-        [JsonProperty("answers")]
+        [JsonPropertyName("answers")]
         public List<AnswerModel> Answers { get; set; } = new List<AnswerModel>();
 
         public GameModel() { }

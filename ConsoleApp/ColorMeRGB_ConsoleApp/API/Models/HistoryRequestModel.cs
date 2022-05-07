@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace API.Models
 {
     public class HistoryRequestModel
     {
-        [JsonProperty("auth_token")]
+        [JsonPropertyName("auth_token")]
         public string AuthToken { get; set; }
 
-        [JsonProperty("api_key")]
+        [JsonPropertyName("api_key")]
         public string ApiKey { get; set; }
     }
 }
