@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Services.Decorators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace Services.Models
 
         public Guid GameId { get; set; }
 
+        [StringSizeAttribute(6, 6)]
         public string GuessColor { get; set; }
 
         public float Distance { get; set; }

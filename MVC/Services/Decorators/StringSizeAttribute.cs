@@ -20,9 +20,29 @@ AllowMultiple = false, Inherited = true)]
     public class StringSizeAttribute : ValidationAttribute
     {
         //Minimum length of a string
+        //Inclusive
         public int MinLength { get; set; }
+
         //maximum length of a string
+        //Inclusive
         public int MaxLength { get; set; }
+
+        // Owen
+        // Default constructor
+        public StringSizeAttribute() { }
+
+        // Owen
+        // Min Max constructor
+        /// <summary>
+        /// New Number Size constraint
+        /// </summary>
+        /// <param name="min">Inclusive Minimum</param>
+        /// <param name="max">Inclusive Maximum</param>
+        public StringSizeAttribute(int min, int max)
+        {
+            MinLength = min;
+            MaxLength = max;
+        }
 
         //Make sure string is valid based on requirements
         public override bool IsValid(object value)
