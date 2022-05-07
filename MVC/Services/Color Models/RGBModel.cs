@@ -7,25 +7,23 @@ using System.Threading.Tasks;
 
 // Written by Owen Ravelo
 
-namespace Services.Game
+namespace Services.Color_Models
 {
-    public class RGB
+    public class RGBModel : IRGB
     {
-        [NumberSize(0,255)]
-        public int R { get; set; }
         [NumberSize(0, 255)]
-        public int G { get; set; }
+        public int R { get; set; } = 255;
         [NumberSize(0, 255)]
-        public int B { get; set; }
+        public int G { get; set; } = 255;
+        [NumberSize(0, 255)]
+        public int B { get; set; } = 255;
 
-        public RGB() 
+        public RGBModel() 
         {
-            R = 255;
-            G = 255;
-            B = 255;
+
         }
 
-        public RGB(int r, int g, int b)
+        public RGBModel(int r, int g, int b)
         {
             R = r;
             G = g;
@@ -36,7 +34,7 @@ namespace Services.Game
         /// Returns the distance between two RGB elements.
         /// </summary>
         /// <returns></returns>
-        public static float Distance(RGB one, RGB two) 
+        public static float Distance(IRGB one, IRGB two) 
         {
             int x = one.R - two.R;
             int y = one.G - two.G;
@@ -45,9 +43,9 @@ namespace Services.Game
             return distance;
         }
 
-        public float Distance(RGB other) 
+        public float Distance(RGBModel other) 
         {
-            return RGB.Distance(this, other);
+            return RGBModel.Distance(this, other);
         }
     }
 }

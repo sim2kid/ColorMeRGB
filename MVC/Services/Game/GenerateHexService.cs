@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Adapters
+namespace Services.Game
 {
-    //Author: Sebastian Pedersen
-    //Creation Date: May 7, 2022
-    public class HexToRgbAdapter
+    internal class GenerateHexService
     {
     }
 }

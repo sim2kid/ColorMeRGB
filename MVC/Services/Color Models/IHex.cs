@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Adapters
+namespace Services.Color_Models
 {
     //Author: Sebastian Pedersen
     //Creation Date: May 7, 2022
-    public class RgbToHexAdapter
+    public interface IHex
     {
+        public string Hex { get; set; }
     }
 }
