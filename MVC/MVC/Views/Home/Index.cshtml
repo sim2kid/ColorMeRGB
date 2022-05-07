@@ -2,13 +2,74 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+
+<style>
+    body {
+        background-image: url("https://images.wallpaperscraft.com/image/single/gradient_spots_texture_129927_2560x1600.jpg");
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-attachment: scroll;
+    }
+    #para1 {
+        color: white;
+        font-size: 80px;
+        font-family: Tahoma, Verdana, sans-serif;
+        margin-top: 200px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .button {
+        background-color: deepskyblue;
+        border: none;
+        color: white;
+        padding: 15px 40px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-family: Tahoma, Verdana, sans-serif;
+        font-size: 24px;
+        cursor: pointer;
+        border-radius: 16px;
+        transition-duration: 0.4s;
+    }
+    .button1 {
+        background-color: deepskyblue;
+        color: white;
+        border: 2px solid deepskyblue;
+    }
+
+    .button1:hover {
+        background-color: white;
+        color: deepskyblue;
+        border: 2px solid deepskyblue;
+    }
+   
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        border: none;
+        margin-bottom: 350px;
+    }
+</style>
+
+<p id="para1">ColorMe RGB</p>
+
+<div class="center">
+    <button class="button button1" onclick="location.href = '@Url.Action("Game","Home")'">Play!</button>
+</div>
+
+
+
+@*<div class="jumbotron">
     <h1>ASP.NET</h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+</div>*@
 
-<div class="row">
+
+@*<div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>
@@ -28,4 +89,4 @@
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
-</div>
+</div>*@
