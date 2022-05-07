@@ -119,9 +119,13 @@ namespace Services.Adapters
 
         //constructor
         //_IRGB and _IHex are used for the Gets and Sets of the above properties
-        public ColorAdapter(IRGB rgb, IHex hex)
+        public ColorAdapter(IRGB rgb)
         {
             _IRGB = rgb;
+        }
+
+        public ColorAdapter(IHex hex)
+        {
             _IHex = hex;
         }
 
