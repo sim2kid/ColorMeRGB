@@ -14,13 +14,16 @@ namespace Services.Models
     public class GameRecordModel
     {
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonPropertyName("user_id")]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
+
+        [JsonPropertyName("answer_color")]
+        public string Answer { get; set; }
 
         [JsonPropertyName("completed")]
         public bool Completed { get; set; }

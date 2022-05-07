@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace Services.Models
+// Written by Owen Ravelo
+
+namespace API.Models
 {
-    /// <summary>
-    /// Author: Sebastian Pedersen
-    /// Date: 04/22/2022
-    /// </summary>
-    public class UserRecordModel
+    public class UserModel
     {
         [JsonPropertyName("id")]
         public Guid Id { get; set; }
