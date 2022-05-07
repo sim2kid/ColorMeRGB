@@ -20,9 +20,32 @@ AllowMultiple = false, Inherited = true)]
     public class NumberSizeAttribute : ValidationAttribute
     {
         //Minimum length of a number
+        /// <summary>
+        /// Inclusive Minimum number
+        /// </summary>
         public int MinSize { get; set; }
         //maximum length of a number
+        /// <summary>
+        /// Inclusive Maximum number
+        /// </summary>
         public int MaxSize { get; set; }
+
+        // Owen
+        // Default constructor
+        public NumberSizeAttribute() { }
+
+        // Owen
+        // Min Max constructor
+        /// <summary>
+        /// New Number Size constraint
+        /// </summary>
+        /// <param name="min">Inclusive Minimum</param>
+        /// <param name="max">Inclusive Maximum</param>
+        public NumberSizeAttribute(int min, int max) 
+        {
+            MinSize = min;
+            MaxSize = max;
+        }
 
         public override bool IsValid(object value)
         {
