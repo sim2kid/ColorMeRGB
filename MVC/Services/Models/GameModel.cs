@@ -15,7 +15,7 @@ namespace Services.Models
 
         public Guid UserId { get; set; }
 
-        [StringSizeAttribute(6, 6)]
+        [StringSizeAttribute(6, 6, ErrorMessage = "Answer color hex must always be 6 characters long")]
         public string AnswerColor { get; set; }
 
         public DateTime Timestamp { get; set; }

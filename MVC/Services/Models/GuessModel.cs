@@ -15,7 +15,7 @@ namespace Services.Models
 
         public Guid GameId { get; set; }
 
-        [StringSizeAttribute(6, 6)]
+        [StringSizeAttribute(6, 6, ErrorMessage ="Guess color hex must always be 6 characters long")]
         public string GuessColor { get; set; }
 
         public float Distance { get; set; }
