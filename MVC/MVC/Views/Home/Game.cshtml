@@ -60,12 +60,12 @@ body {
   display: flex;
   background-color: 0, 0, 0, 0, 0;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
 }
 
 .column-container {
-  flex-direction: column;
+  flex-direction: row;
   display: flex;
   flex-wrap: wrap;
   background-color: 0, 0, 0, 0, 0;
@@ -77,6 +77,13 @@ body {
 #input {
   height: 100vh;
   position: relative;
+
+  flex-direction: column;
+  display: flex;
+  background-color: 0, 0, 0, 0, 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .column {
@@ -127,7 +134,7 @@ input[type=submit]:hover {
 
 
     <div class="flex-container">
-        <div id="input" class="column column-container">
+        <div id="input" class="column">
             <div class="square"></div>
             <div class="border">
                 <form action="/action_page.php">
