@@ -14,18 +14,21 @@ namespace Services.Models
     public class GuessRecordModel
     {
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonPropertyName("game_id")]
-        public int GameId { get; set; }
+        public Guid GameId { get; set; }
 
-        [JsonPropertyName("answer")]
-        public int Answer { get; set; }
+        [JsonPropertyName("guess_color")]
+        public string? Guess { get; set; }
 
-        [JsonPropertyName("guess")]
-        public int Guess { get; set; }
+        [JsonPropertyName("timestamp")]
+        public DateTime Timestamp { get; set; }
 
         [JsonPropertyName("distance")]
         public float Distance { get; set; }
+
+        [JsonPropertyName("is_correct")]
+        public bool IsCorrect { get; set; }
     }
 }
