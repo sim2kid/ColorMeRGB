@@ -43,7 +43,7 @@ namespace Services.Color_Models
             return distance;
         }
 
-        public float Distance(RGBModel other) 
+        public float Distance(IRGB other) 
         {
             return RGBModel.Distance(this, other);
         }
