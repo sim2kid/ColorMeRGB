@@ -23,6 +23,11 @@
         height: 200px;
         border-radius: 5px;
         flex-shrink: 0;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center; /* align vertical */
+        flex-wrap: nowrap;
+        flex-direction:column;
     }
 
     .flex-container {
@@ -64,6 +69,14 @@
     }
     div > input {
         flex-grow: 1;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .invert {
+        color: #EEE;
     }
     
 
@@ -207,7 +220,10 @@ function ensureInBounds(id)
         </div>
         <div class="ans-container @extraClassB">
             @foreach(GuessModel guess in Game.Guesses) {
-                <div class="square" style="background-color: rgb(@guess.Color.R, @guess.Color.G, @guess.Color.B);"></div>
+                <div class="square@(guess.Color.isDark?" invert":"")" style="background-color: rgb(@guess.Color.R, @guess.Color.G, @guess.Color.B);">
+                    <p><b>R: </b>@guess.Color.R <b>G: </b>@guess.Color.G <b>B: </b>@guess.Color.B</p>
+                    <p>Distance: <b>@guess.Distance.ToString("0")</b></p>
+                </div>
             }
         </div>
     </div>

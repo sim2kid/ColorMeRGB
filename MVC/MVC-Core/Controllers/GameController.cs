@@ -133,7 +133,7 @@ namespace MVC_Core.Controllers
             }
 
             // Plot new bits to database
-            var response = await game.MakeGuess(AuthToken, gm.Id, gm.Answer, model.Response, gm.Guesses.Count + 1);
+            var response = await game.MakeGuess(AuthToken, gm.Id, gm.Answer, model.Response, gm.Guesses.Count);
             if (!response.Authorized)
             {
                 // API Error
@@ -160,8 +160,9 @@ namespace MVC_Core.Controllers
                 return RedirectToAction("Index", "History");
             }
 
+            var color = new RGBModel(model.Response);
             // Populate model for future use
-            gm.AddGuess(new GuessModel() { Color = new RGBModel(model.Response) });
+            gm.AddGuess(new GuessModel() { Color = color, Distance = RGBModel.Distance(color, gm.Answer)});
 
             gameModel = gm;
             ViewBag.Game = gm;

@@ -14,7 +14,7 @@ namespace Services
     public class GameService
     {
         WebRequest.APICall api = new WebRequest.APICall();
-        readonly int maxGuesses = 5;
+        readonly int maxGuesses = 6;
         readonly float closenessCutoff = 10;
 
         public async Task<GameResponseModel> NewGame(string token) 
@@ -50,7 +50,7 @@ namespace Services
 
         public bool hasEnd(int count)
         {
-            return count >= maxGuesses;
+            return count + 1 >= maxGuesses;
         }
     }
 }

@@ -167,5 +167,7 @@ namespace Services.Adapters
             }
             return RGBModel.Distance(this, other);
         }
+
+        public bool isDark => ((R + G + B) / 3f) < (255f * 0.44);
     }
 }

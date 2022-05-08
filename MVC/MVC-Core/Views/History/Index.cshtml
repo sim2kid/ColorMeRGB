@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Services.Models.GameModel>;
 @{
     ViewBag.Title = "History";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,17 +14,33 @@
     }
 
     .square {
-        margin-top: 100px;
         width: 100%;
         height: 100px;
-        background: rgba(60, 105, 243, 1);
         border-radius: 5px 5px 0 0;
-        font-size: 24;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center; /* align vertical */
+        flex-wrap: nowrap;
+        flex-direction:column;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .invert {
+        color: #EEE;
     }
 
     .answer {
         height: 200px;
         flex-grow: 1;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center; /* align vertical */
+        flex-wrap: nowrap;
+        flex-direction:column;
+        
     }
 
     .answer-first {
@@ -35,24 +51,13 @@
         border-radius: 0 0 5px 0;
     }
 
-    .square1 {
-        background: rgba(80, 105, 243, 1);
-    }
-
-    .square2 {
-        background: rgba(100, 105, 243, 1);
-    }
-
-    .square3 {
-        background: rgba(120, 105, 243, 1);
-    }
-
-    .square4 {
-        background: rgba(140, 105, 243, 1);
-    }
-
-    .square5 {
-        background: rgba(160, 105, 243, 1);
+    .history {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        gap: 50px;
+        width: 100%;
     }
 
     .flex-container {
@@ -61,6 +66,10 @@
         background-color: 0;
         justify-content: center;
         font-size: 24;
+
+        border-radius: 5px;
+
+        box-shadow: 5px 5px 10px darkred;
     }
 
     .answers {
@@ -68,23 +77,40 @@
         display: flex;
         width: 100%;
     }
+    
+    .wellRounded {
+        border-radius: 5px !important;
+    }
+
+    .correct {
+        box-shadow: 5px 5px 10px lime;
     }
 </style>
 
 <main>
-
-
-    <div class="flex-container">
-        <div class="square"></div>
-        <div id="answers" class="answers">
-            <div class="answer square1 answer-first"></div>
-            <div class="answer square2"></div>
-            <div class="answer square3"></div>
-            <div class="answer square4"></div>
-            <div class="answer square5 answer-last"></div>
+    <div class="history">
+        @foreach(var game in Model) { // Owen
+        <div>
+            <h2>@game.Timestamp.ToString("f")</h2>
+            <div class="flex-container@(game.hasCorrectAnswer ? " correct" : "")">
+                <div class="square@(game.Answers.Count == 0 ? " wellRounded" : string.Empty)@(game.rgb.isDark?" invert":"")" style="background-color: #@game.CorrectAnswer">
+                    <p><b>@game.Answers.Count</b> @(game.Answers.Count == 1 ? "Guess" : "Guesses")</p>
+                    <p><b>R: </b>@game.rgb.R <b>G: </b>@game.rgb.G <b>B: </b>@game.rgb.B</p>
+                </div>
+                <div id="answers" class="answers">
+                    @for(int i = 0; i < game.Answers.Count; i++) {
+                        var answer = game.Answers[i];
+                        string extraClass = ((i==0) ? " answer-first" : string.Empty) + ((i == game.Answers.Count - 1) ? " answer-last" : string.Empty);
+                        <div class="answer@(extraClass)@(answer.rgb.isDark?" invert":"")" style="background-color: #@answer.GuessColor">
+                            <p><b>R: </b>@answer.rgb.R <b>G: </b>@answer.rgb.G <b>B: </b>@answer.rgb.B</p>
+                            <p>Distance: <b>@answer.Distance.ToString("0")</b></p>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
+        }
     </div>
-
 
 
 </main>

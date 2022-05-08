@@ -118,7 +118,7 @@ namespace Services.WebRequest
             return response;
         }
 
-        public async Task<HistoryResponseModel?> Guess(string AuthToken)
+        public async Task<HistoryResponseModel?> History(string AuthToken)
         {
             string url = ApiUrl + "history/all";
             HistoryRequestModel model = new HistoryRequestModel()

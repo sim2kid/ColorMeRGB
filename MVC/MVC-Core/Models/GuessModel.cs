@@ -10,5 +10,7 @@ namespace MVC_Core.Models
     {
         [JsonProperty("color")]
         public RGBModel Color { get; set; } = new RGBModel();
+        [JsonProperty("distance")]
+        public float Distance;
     }
 }
