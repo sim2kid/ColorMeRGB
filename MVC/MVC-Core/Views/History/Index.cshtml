@@ -40,7 +40,6 @@
         align-items: center; /* align vertical */
         flex-wrap: nowrap;
         flex-direction:column;
-        
     }
 
     .answer-first {
@@ -70,6 +69,17 @@
         border-radius: 5px;
 
         box-shadow: 5px 5px 10px darkred;
+        transition: all 1s ease;
+        position: relative;
+    }
+
+    .flex-container:hover {
+        transform: translate(-3px, -3px) scale(1.01);
+        box-shadow: 10px 10px 15px darkred;
+    }
+
+    .correct:hover {
+        box-shadow: 10px 10px 15px darkgreen;
     }
 
     .answers {
@@ -77,13 +87,15 @@
         display: flex;
         width: 100%;
     }
+
+    
     
     .wellRounded {
         border-radius: 5px !important;
     }
 
     .correct {
-        box-shadow: 5px 5px 10px lime;
+        box-shadow: 5px 5px 10px darkgreen;
     }
 </style>
 

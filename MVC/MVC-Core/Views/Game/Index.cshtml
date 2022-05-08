@@ -28,6 +28,14 @@
         align-items: center; /* align vertical */
         flex-wrap: nowrap;
         flex-direction:column;
+        box-shadow: 5px 5px 10px #888;
+        transition: all 1s ease;
+        position: relative;
+    }
+
+    .square:hover {
+        transform: translate(-3px, -3px) scale(1.01);
+        box-shadow: 10px 10px 15px #888;
     }
 
     .flex-container {
@@ -78,6 +86,43 @@
     .invert {
         color: #EEE;
     }
+
+    .new-guess {
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        animation-name: slideInBottom;
+        animation-direction: normal;
+        animation-iteration-count: 1;
+    }
+
+    .guess {
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        animation-name: shuffle;
+        animation-direction: normal;
+        animation-iteration-count: 1;
+    }
+
+    @@keyframes shuffle {
+        0% {
+            transform: translateY(-20px);
+        }
+        90% {
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes slideInBottom {
+        0% {
+            transform: translateY(-200%);
+        }
+        90% {
+            transform: translateY(20px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
     
 
     /* Phone Size */
@@ -109,6 +154,7 @@
             align-items: center;
             width: max-content;
         }
+
         .ignore {
             top: 0px !important;
             left: 0px !important;
@@ -174,6 +220,7 @@
         background-color: #f2f2f2;
         padding: 20px;
         font-family: Tahoma, Verdana, sans-serif;
+        box-shadow: 5px 5px 10px #888;
     }
 </style>
 <script>
@@ -219,8 +266,9 @@ function ensureInBounds(id)
             </div>
         </div>
         <div class="ans-container @extraClassB">
-            @foreach(GuessModel guess in Game.Guesses) {
-                <div class="square@(guess.Color.isDark?" invert":"")" style="background-color: rgb(@guess.Color.R, @guess.Color.G, @guess.Color.B);">
+            @for(int i = 0; i < Game.Guesses.Count; i++) {
+                var guess = Game.Guesses[i];
+                <div class="square@(guess.Color.isDark?" invert":"") @(i == 0 ? "new-guess": "guess")" style="background-color: rgb(@guess.Color.R, @guess.Color.G, @guess.Color.B);">
                     <p><b>R: </b>@guess.Color.R <b>G: </b>@guess.Color.G <b>B: </b>@guess.Color.B</p>
                     <p>Distance: <b>@guess.Distance.ToString("0")</b></p>
                 </div>

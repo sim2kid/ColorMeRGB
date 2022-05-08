@@ -15,7 +15,7 @@ namespace Services
     {
         WebRequest.APICall api = new WebRequest.APICall();
         readonly int maxGuesses = 6;
-        readonly float closenessCutoff = 10;
+        readonly float closenessCutoff = 15;
 
         public async Task<GameResponseModel> NewGame(string token) 
         {

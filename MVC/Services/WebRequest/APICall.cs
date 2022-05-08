@@ -24,6 +24,19 @@ namespace Services.WebRequest
             client.DefaultRequestHeaders.Add("User-Agent", ".NET Asp-Net MVC");
         }
 
+        private T? Deserialize<T>(string? json)
+        {
+            try
+            {
+                return (json != null ? JsonSerializer.Deserialize<T>(json) : default(T));
+            }
+            catch (Exception ex) 
+            {
+                // Error has occured
+                return default(T);
+            }
+        }
+
 
         /// <summary>
         /// Makes request to an api and returns a string with json
@@ -32,7 +45,7 @@ namespace Services.WebRequest
         /// <param name="verb">The http verb to use</param>
         /// <param name="body">The json content as a string</param>
         /// <returns>Json object string</returns>
-        private async Task<string?> MakeRequest(string url, HttpMethod verb, object requestBody) 
+            private async Task<string?> MakeRequest(string url, HttpMethod verb, object requestBody) 
         {
             string body = JsonSerializer.Serialize(requestBody);
             HttpRequestMessage request = new HttpRequestMessage()
@@ -56,7 +69,7 @@ namespace Services.WebRequest
                 Password = password
             };
             string? result = await MakeRequest(url, HttpMethod.Post, model);
-            AuthResponseModel? response = result != null ? JsonSerializer.Deserialize<AuthResponseModel>(result) : null;
+            AuthResponseModel? response = Deserialize<AuthResponseModel>(result);
             return response;
         }
 
@@ -70,7 +83,7 @@ namespace Services.WebRequest
                 Password = password
             };
             string? result = await MakeRequest(url, HttpMethod.Post, model);
-            AuthResponseModel? response = result != null ? JsonSerializer.Deserialize<AuthResponseModel>(result) : null;
+            AuthResponseModel? response = Deserialize<AuthResponseModel>(result);
             return response;
         }
 
@@ -83,7 +96,7 @@ namespace Services.WebRequest
                 AuthToken = AuthToken,
             };
             string? result = await MakeRequest(url, HttpMethod.Post, model);
-            GameResponseModel? response = result != null ? JsonSerializer.Deserialize<GameResponseModel>(result) : null;
+            GameResponseModel? response = Deserialize<GameResponseModel>(result);
             return response;
         }
         public async Task<GameResponseModel?> StartGame(string AuthToken, Guid GameId, string Color)
@@ -97,7 +110,7 @@ namespace Services.WebRequest
                 Color = Color,
             };
             string? result = await MakeRequest(url, HttpMethod.Post, model);
-            GameResponseModel? response = result != null ? JsonSerializer.Deserialize<GameResponseModel>(result) : null;
+            GameResponseModel? response = Deserialize<GameResponseModel>(result);
             return response;
         }
         public async Task<GameResponseModel?> Guess(string AuthToken, Guid GameId, string Color, float Distance, bool isCorrect, bool isEnd)
@@ -114,7 +127,7 @@ namespace Services.WebRequest
                 isEnd = isEnd,
             };
             string? result = await MakeRequest(url, HttpMethod.Post, model);
-            GameResponseModel? response = result != null ? JsonSerializer.Deserialize<GameResponseModel>(result) : null;
+            GameResponseModel? response = Deserialize<GameResponseModel>(result);
             return response;
         }
 
@@ -127,7 +140,7 @@ namespace Services.WebRequest
                 AuthToken = AuthToken
             };
             string? result = await MakeRequest(url, HttpMethod.Get, model);
-            HistoryResponseModel? response = result != null ? JsonSerializer.Deserialize<HistoryResponseModel>(result) : null;
+            HistoryResponseModel? response = Deserialize<HistoryResponseModel>(result);
             return response;
         }
     }
