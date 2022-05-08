@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MVC_Core.Controllers
 {
-    public class GameController : Controller
+    public class GameController : BaseController
     {
         // GET: Game
         public ActionResult Index()

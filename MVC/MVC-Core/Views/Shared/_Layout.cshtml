@@ -9,6 +9,10 @@
     <link href="~/css/bootstrap-theme.css rel="stylesheet" type="text/css">
     <script src="~/js/modernizr-2.8.3.js"></script>
 </head>
+@{
+    // Written by Owen Ravelo
+    bool LoggedIn = ViewBag.LoggedIn ?? false;
+}
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -22,10 +26,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Sign Up", "SignUp", "Auth")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Auth")</li>
-                    <li>@Html.ActionLink("Game", "Index", "Game")</li>
-                    <li>@Html.ActionLink("History", "Index", "History")</li>
+                    @if(!LoggedIn) {
+                        <li style="background-color: #591110;">@Html.ActionLink("Login", "Login", "Auth")</li>
+                        <li>@Html.ActionLink("Sign Up", "SignUp", "Auth")</li>
+                    } else
+                    {
+                        <li>@Html.ActionLink("Play", "Index", "Game")</li>
+                        <li>@Html.ActionLink("History", "Index", "History")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Auth")</li>
+                    }
                 </ul>
             </div>
         </div>

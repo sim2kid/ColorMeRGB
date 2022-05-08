@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MVC_Core.Models.AuthModel;
+@{
     ViewBag.Title = "Sign Up";
 }
 
@@ -52,11 +53,11 @@
         border: 2px solid deepskyblue;
     }
 
-        .button1:hover {
-            background-color: skyblue;
-            color: white;
-            border: 2px solid deepskyblue;
-        }
+    .button1:hover {
+        background-color: skyblue;
+        color: white;
+        border: 2px solid deepskyblue;
+    }
 
     .container1 {
         padding: 16px;
@@ -70,25 +71,29 @@
     }
 </style>
 
-<p id="para2">Sign Up</p>
+
 <body>
-
-
-
+    <p id="para2">Sign Up</p>
     <div class="container1">
-        <label for="uname"><b>Username</b></label>
-        <br>
-        <input type="text" placeholder="Create Username" name="uname" required>
-        <br>
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <label for="username"><b>Username</b></label>
+            <br>
+            <input type="text" placeholder="Create Username" name="username" value="@Model.Username" required>
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" });
+            <br>
 
-        <label for="psw"><b>Password</b></label>
-        <br>
-        <input type="password" placeholder="Create Password" name="psw" required>
 
-        <button class="button1" type="submit">Sign Up</button>
+            <label for="password"><b>Password</b></label>
+            <br>
+            <input type="password" placeholder="Create Password" name="password" required>
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" });
 
-        <p>Already have an account? <a href="@Url.Action("Login", "Home")">Log in here</a></p>
+            <button class="button1" type="submit">Sign Up</button>
 
+            <p>Already have an account? <a href="@Url.Action("Login", "Home")">Log in here</a></p>
+        }
     </div>
 
 

@@ -26,9 +26,10 @@ AllowMultiple = false, Inherited = true)]
         //Lowercase letters
         //Numbers
         //Symbols (i.e. !, @, #, etc.)
-        public override bool IsValid(object value)
+        public override bool IsValid(object? value)
         {
-            if (!Regex.IsMatch((string)value, "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).+$"));
+            if (value == null || value is not string || 
+                !Regex.IsMatch((string)value, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).+$"))
             {
                 return false;
             }

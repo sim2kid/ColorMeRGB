@@ -2,7 +2,7 @@
 
 namespace MVC_Core.Controllers
 {
-    public class HistoryController : Controller
+    public class HistoryController : BaseController
     {
         public IActionResult Index()
         {
