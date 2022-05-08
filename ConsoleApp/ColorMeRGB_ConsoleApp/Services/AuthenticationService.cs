@@ -29,9 +29,9 @@ namespace Services
             return (hash, salt);
         }
 
-        public void AddUser(UserRecordModel model) 
+        public Guid AddUser(UserRecordModel model) 
         {
-            uDal.UsersInsertRecords(model);
+            return uDal.UsersInsertRecords(model);
         }
 
         public bool isValidLogin(string username, string password, out Guid id) 

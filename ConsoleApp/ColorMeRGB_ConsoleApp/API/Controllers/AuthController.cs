@@ -43,7 +43,6 @@ namespace API.Controllers
             UserModel model = new UserModel();
             model.Username = auth.Username;
             model.SignupTime = DateTime.Now;
-            model.Id = Guid.NewGuid();
 
             // Ensure username doesn't already exist
             string username = model.Username;
@@ -70,20 +69,19 @@ namespace API.Controllers
             // Save model to database
             UserRecordModel record = new UserRecordModel()
             {
-                Id = model.Id,
                 Username = model.Username,
                 Password = model.Password,
                 Salt = model.Salt,
                 SignupTime = model.SignupTime,
             };
-            authService.AddUser(record);
+            model.Id = authService.AddUser(record);
 
             // Generate JWE token
             var token = tokenService.GenerateToken(model.Id);
             // Return token.
             return Ok(new AuthResponseModel()
             {
-                Message = "Login Successful.",
+                Message = "Signup Successful.",
                 Authorized = true,
                 Success = true,
                 AuthToken = token
