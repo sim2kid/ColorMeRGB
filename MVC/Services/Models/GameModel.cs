@@ -1,25 +1,22 @@
-﻿using Services.Decorators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
+// Written by Owen Ravelo
 namespace Services.Models
 {
-    //Author: Sebastian Pedersen
-    //Creation Date: May 4, 2022
     public class GameModel
     {
-        public Guid Id { get; set; }
-
-        public Guid UserId { get; set; }
-
-        [StringSizeAttribute(6, 6, ErrorMessage = "Answer color hex must always be 6 characters long")]
-        public string AnswerColor { get; set; }
-
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
 
+        [JsonPropertyName("correct_answer")]
+        public string CorrectAnswer { get; set; } = string.Empty;
+
+        [JsonPropertyName("completed")]
         public bool Completed { get; set; }
+
+        [JsonPropertyName("answers")]
+        public List<AnswerModel> Answers { get; set; } = new List<AnswerModel>();
+
+        public GameModel() { }
     }
 }

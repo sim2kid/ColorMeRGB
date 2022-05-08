@@ -27,7 +27,7 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("Signup")]
-        public IActionResult Signup([FromBody] AuthModel auth) 
+        public IActionResult Signup([FromBody] AuthRequestModel auth) 
         {
             if (!apiKey.IsKeyValid(auth.ApiKey))
             {
@@ -92,7 +92,7 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public IActionResult Login([FromBody] AuthModel auth)
+        public IActionResult Login([FromBody] AuthRequestModel auth)
         {
             if (!apiKey.IsKeyValid(auth.ApiKey))
             {

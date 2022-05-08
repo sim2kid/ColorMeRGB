@@ -4,7 +4,7 @@
 
 namespace API.Models
 {
-    public class AuthModel
+    public class AuthRequestModel
     {
         [JsonPropertyName("username")]
         public string Username { get; set; }
