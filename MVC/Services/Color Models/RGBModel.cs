@@ -30,6 +30,13 @@ namespace Services.Color_Models
             B = b;
         }
 
+        public RGBModel(IRGB rgb)
+        {
+            R = rgb.R;
+            G = rgb.G;
+            B = rgb.B;
+        }
+
         /// <summary>
         /// Returns the distance between two RGB elements.
         /// </summary>

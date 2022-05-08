@@ -13,8 +13,8 @@ namespace MVC_Core.Controllers
         [Route("Login")]
         public IActionResult Login()
         {
-            // if has auth token
-            if (!string.IsNullOrWhiteSpace(AuthToken)) 
+            // if logged in
+            if (isLoggedIn) 
             {
                 // redirect to home screen
                 return RedirectToAction("Index", "Home");
@@ -77,8 +77,8 @@ namespace MVC_Core.Controllers
         [Route("SignUp")]
         public IActionResult SignUp()
         {
-            // if has auth token
-            if (!string.IsNullOrWhiteSpace(HttpContext.Session.GetString("AuthToken")))
+            // if logged in
+            if (isLoggedIn)
             {
                 // redirect to home screen
                 return RedirectToAction("Index", "Home");

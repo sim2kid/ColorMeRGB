@@ -1,8 +1,10 @@
-﻿@model MVC_Core.Models.GameModel
+﻿@model MVC_Core.Models.GameFormModel
 @{
     ViewBag.Title = "Game";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var ran = new Random();
+    GameModel Game = ViewBag.Game ?? new GameModel();
+    string extraClassA = Game.Guesses.Count == 0 ? "ignore" : string.Empty;
+    string extraClassB = Game.Guesses.Count == 0 ? "min" : string.Empty;
 }
 
 
@@ -19,29 +21,8 @@
         margin: 10px;
         width: 200px;
         height: 200px;
-        background: rgba(84, 105, 243, 1);
         border-radius: 5px;
         flex-shrink: 0;
-    }
-
-    .square1 {
-        background: rgba(234, 96, 104, 1);
-    }
-
-    .square2 {
-        background: rgba(234, 96, 104, 1);
-    }
-
-    .square3 {
-        background: rgba(234, 96, 104, 1);
-    }
-
-    .square4 {
-        background: rgba(234, 96, 104, 1);
-    }
-
-    .square5 {
-        background: rgba(234, 96, 104, 1);
     }
 
     .flex-container {
@@ -115,6 +96,16 @@
             align-items: center;
             width: max-content;
         }
+        .ignore {
+            top: 0px !important;
+            left: 0px !important;
+            transform: none !important;
+            position: static !important;
+            justify-content: center !important;
+            align-items: center !important;
+            margin: auto !important;
+            height: 100%;
+        }
         .flex-container {
             align-items: flex-start;
         }
@@ -127,6 +118,13 @@
             width: 50%;
             min-height: 100vh;
         }
+    }
+
+    .min 
+    {
+        flex-grow: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
     }
 
 
@@ -175,13 +173,11 @@ function ensureInBounds(id)
 }
 </script>
 
-<body>
-
-
+<main>
     <div class="flex-container">
-        <div class="column">
-            <div id="input">
-                <div class="square"></div>
+        <div class="column @extraClassA">
+            <div id="input" class="@extraClassA">
+                <div class="square" style="background-color: rgb(@Game.Answer.R, @Game.Answer.G, @Game.Answer.B);"></div>
                 <div class="border">
                     @using (Html.BeginForm()) { // Owen
                         @Html.AntiForgeryToken()
@@ -189,17 +185,17 @@ function ensureInBounds(id)
 
                         <div class="form-flex">
                             @Html.LabelFor(model => model.R)
-                            <input type="number" min="0" max="255" value="@ran.Next(0,256)" 
+                            <input type="number" min="0" max="255" value="@Model.R" 
                             onchange="ensureInBounds('rValue')" id="rValue" name="R">
                             @Html.ValidationMessageFor(model => model.R, "", new { @class = "text-danger" })
 
                             @Html.LabelFor(model => model.G)
-                            <input type="number" min="0" max="255" value="@ran.Next(0,256)" 
+                            <input type="number" min="0" max="255" value="@Model.G" 
                             onchange="ensureInBounds('gValue')" id="gValue" name="G">
                             @Html.ValidationMessageFor(model => model.G, "", new { @class = "text-danger" })
 
                             @Html.LabelFor(model => model.B)
-                            <input type="number" min="0" max="255" value="@ran.Next(0,256)" 
+                            <input type="number" min="0" max="255" value="@Model.B" 
                             onchange="ensureInBounds('bValue')" id="bValue" name="B">
                             @Html.ValidationMessageFor(model => model.B, "", new { @class = "text-danger" })
                             <br>
@@ -209,10 +205,12 @@ function ensureInBounds(id)
                 </div>
             </div>
         </div>
-        <div class="ans-container">
-            <div class="square square1"></div>
+        <div class="ans-container @extraClassB">
+            @foreach(GuessModel guess in Game.Guesses) {
+                <div class="square" style="background-color: rgb(@guess.Color.R, @guess.Color.G, @guess.Color.B);"></div>
+            }
         </div>
     </div>
 
 
-</body>
+</main>

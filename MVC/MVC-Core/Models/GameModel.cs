@@ -1,10 +1,6 @@
-﻿using Services.Decorators;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Web;
+﻿using Services;
+using Services.Color_Models;
+using Newtonsoft.Json;
 
 // Written by Owen Ravelo
 
@@ -12,17 +8,39 @@ namespace MVC_Core.Models
 {
     public class GameModel
     {
-        [JsonPropertyName("R")]
-        [Required]
-        [NumberSize(0, 255)]
-        public int R { get; set; }
-        [JsonPropertyName("G")]
-        [Required]
-        [NumberSize(0, 255)]
-        public int G { get; set; }
-        [JsonPropertyName("B")]
-        [Required]
-        [NumberSize(0,255)]
-        public int B { get; set; }
+        [JsonProperty("id")]
+        public Guid Id { get; private set; }
+        [JsonProperty("answer")]
+        public RGBModel Answer { get; set; }
+        [JsonProperty("guesses")]
+        public List<GuessModel> Guesses { get; set; }
+
+        public GameModel() 
+        {
+            Answer = new RGBModel();
+            Guesses = new List<GuessModel>();
+        }
+
+        public GameModel(Guid id, RGBModel color) 
+        {
+            Id = id;
+            Answer = color;
+            Guesses = new List<GuessModel>();
+        }
+
+        public void AddGuess(GuessModel guess) 
+        {
+            Guesses.Insert(0, guess);
+        }
+
+        public static GameModel? FromJson(string? json) 
+        {
+            if (string.IsNullOrWhiteSpace(json)) { return null; }
+            return JsonConvert.DeserializeObject<GameModel>(json);
+        }
+        public string toJson() 
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }
