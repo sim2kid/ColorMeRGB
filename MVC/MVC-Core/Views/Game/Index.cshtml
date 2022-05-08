@@ -1,8 +1,8 @@
 ﻿@model MVC_Core.Models.GameModel
-
 @{
     ViewBag.Title = "Game";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var ran = new Random();
 }
 
 
@@ -21,92 +21,119 @@
         height: 200px;
         background: rgba(84, 105, 243, 1);
         border-radius: 5px;
+        flex-shrink: 0;
     }
 
     .square1 {
-        margin: 10px;
-        width: 200px;
-        height: 200px;
         background: rgba(234, 96, 104, 1);
-        border-radius: 5px;
     }
 
     .square2 {
-        margin: 10px;
-        width: 200px;
-        height: 200px;
         background: rgba(234, 96, 104, 1);
-        border-radius: 5px;
     }
 
     .square3 {
-        margin: 10px;
-        width: 200px;
-        height: 200px;
         background: rgba(234, 96, 104, 1);
-        border-radius: 5px;
     }
 
     .square4 {
-        margin: 10px;
-        width: 200px;
-        height: 200px;
         background: rgba(234, 96, 104, 1);
-        border-radius: 5px;
     }
 
     .square5 {
-        margin: 10px;
-        width: 200px;
-        height: 200px;
         background: rgba(234, 96, 104, 1);
-        border-radius: 5px;
     }
 
     .flex-container {
         flex-direction: row;
         display: flex;
-        background-color: 0, 0, 0, 0, 0;
         justify-content: center;
         align-items: center;
         width: 100%;
+        flex-wrap: nowrap;
     }
 
-    .column-container {
-        flex-direction: row;
-        display: flex;
-        flex-wrap: wrap;
-        background-color: 0, 0, 0, 0, 0;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-
-    #input {
-        height: 100vh;
-        position: relative;
+    .ans-container {
         flex-direction: column;
         display: flex;
-        background-color: 0, 0, 0, 0, 0;
+        flex-wrap: nowrap;
         justify-content: center;
         align-items: center;
+        gap: 10px;
         width: 100%;
+        flex-grow: 1;
     }
 
     .column {
         flex-grow: 1;
     }
 
+    .form-flex {
+        flex-direction: row;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    [for="R"] {
+        margin-left: 0;
+    }
+    div > label {
+        margin: 0 0.5ch 0 1ch;
+        flex-grow: 0;
+    }
+    div > input {
+        flex-grow: 1;
+    }
+    
+
+    /* Phone Size */
     @@media (max-width: 800px) {
         .flex-container {
             flex-direction: column;
+            row-gap: 20px;
+        }
+        #input {
+            position: relative;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        
+    }
+    /* Desktop Size */
+    @@media (min-width: 800px) {
+        #input {
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(calc(calc(21.25ch + 20px) * -2));
+            position: fixed;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: max-content;
+        }
+        .flex-container {
+            align-items: flex-start;
+        }
+        .column {
+            width: 50%;
+            height: 100vh;
+        }
+        .ans-container 
+        {
+            width: 50%;
+            min-height: 100vh;
         }
     }
+
 
     input[type=number], select {
         width: 10ch;
         padding: 12px 10px;
-        margin: 8px 10px 8px 0px;
+        margin: 8px auto;
         display: inline-block;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -122,147 +149,70 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        transition: background-color 0.5s ease, color 0.5s ease;
     }
 
-        input[type=submit]:hover {
-            background-color: skyblue;
-        }
+    input[type=submit]:hover {
+        background-color: skyblue;
+        color: #666;
+    }
 
     .border {
         width: max-content;
         border-radius: 5px;
         background-color: #f2f2f2;
-        padding: 20px 11px 20px 20px;
+        padding: 20px;
         font-family: Tahoma, Verdana, sans-serif;
     }
 </style>
+<script>
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
+function ensureInBounds(id) 
+{
+    let input = document.getElementById(id);
+    input.value = clamp(input.value, 0, 255);
+}
+</script>
 
 <body>
 
 
     <div class="flex-container">
-        <div id="input" class="column">
-            <div class="square"></div>
-            <div class="border">
-                <form method="post" action="@Url.Action("SubmitGuess", "Game")">
-                    @*<label for="rValue">R:</label>*@
-                    @Html.LabelFor(model => model.R)
-                    <input type="number" id="rValue" name="redValue">
+        <div class="column">
+            <div id="input">
+                <div class="square"></div>
+                <div class="border">
+                    @using (Html.BeginForm()) { // Owen
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    @*<label for="gValue">G:</label>*@
-                    @Html.LabelFor(model => model.G)
-                    <input type="number" id="gValue" name="greenValue">
+                        <div class="form-flex">
+                            @Html.LabelFor(model => model.R)
+                            <input type="number" min="0" max="255" value="@ran.Next(0,256)" 
+                            onchange="ensureInBounds('rValue')" id="rValue" name="R">
+                            @Html.ValidationMessageFor(model => model.R, "", new { @class = "text-danger" })
 
-                    @*<label for="bValue">B:</label>*@
-                    @Html.LabelFor(model => model.B)
-                    <input type="number" id="bValue" name="blueValue">
-                    <br>
+                            @Html.LabelFor(model => model.G)
+                            <input type="number" min="0" max="255" value="@ran.Next(0,256)" 
+                            onchange="ensureInBounds('gValue')" id="gValue" name="G">
+                            @Html.ValidationMessageFor(model => model.G, "", new { @class = "text-danger" })
 
-                    <input type="submit" value="Guess!">
-                </form>
+                            @Html.LabelFor(model => model.B)
+                            <input type="number" min="0" max="255" value="@ran.Next(0,256)" 
+                            onchange="ensureInBounds('bValue')" id="bValue" name="B">
+                            @Html.ValidationMessageFor(model => model.B, "", new { @class = "text-danger" })
+                            <br>
+                         </div>
+                        <input type="submit" value="Guess!">
+                    }
+                </div>
             </div>
         </div>
-        <div class="column column-container">
-            <div class="square1"></div>
-            <div class="square2"></div>
-            <div class="square3"></div>
-            <div class="square4"></div>
-            <div class="square5"></div>
+        <div class="ans-container">
+            <div class="square square1"></div>
         </div>
     </div>
 
 
 </body>
-
-@*<style>
-        body {
-            background-color: white;
-            background-image: linear-gradient(white, skyblue);
-            background-attachment: fixed;
-            font-family: Tahoma, Verdana, sans-serif;
-        }
-
-        .square {
-            margin-top: 150px;
-            width: 200px;
-            height: 200px;
-            background: rgba(84, 105, 243, 1);
-            border-radius: 5px;
-        }
-
-        .square2 {
-            margin-top: 0px;
-            margin-bottom: 100px;
-            width: 200px;
-            height: 200px;
-            background: rgba(234, 96, 104, 1);
-            border-radius: 5px;
-        }
-
-        .center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: none;
-            margin-bottom: 20px;
-        }
-
-        input[type=number], select {
-            width: 10ch;
-            padding: 12px 10px;
-            margin: 8px 10px 8px 0px;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        input[type=submit] {
-            width: 42.5ch;
-            background-color: deepskyblue;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-            input[type=submit]:hover {
-                background-color: skyblue;
-            }
-
-        .border {
-            width: max-content;
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px 11px 20px 20px;
-            font-family: Tahoma, Verdana, sans-serif;
-        }
-    </style>
-
-    <div class="center">
-        <div class="square"></div>
-    </div>
-
-    <div class="center">
-        <div class="border">
-            <form action="/action_page.php">
-                <label for="rValue">R:</label>
-                <input type="number" id="rValue" name="redvalue">
-
-                <label for="gValue">G:</label>
-                <input type="number" id="gValue" name="greenValue">
-
-                <label for="bValue">B:</label>
-                <input type="number" id="bValue" name="blueValue">
-                <br>
-
-                <input type="submit" value="Guess!">
-            </form>
-        </div>
-    </div>
-    <div class="center">
-        <div class="square2"></div>
-    </div>*@
-

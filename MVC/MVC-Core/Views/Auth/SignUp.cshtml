@@ -75,7 +75,7 @@
 <body>
     <p id="para2">Sign Up</p>
     <div class="container1">
-        @using (Html.BeginForm()) {
+        @using (Html.BeginForm()) { // Owen Added form validation stuff
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <label for="username"><b>Username</b></label>

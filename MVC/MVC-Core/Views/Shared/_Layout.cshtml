@@ -14,7 +14,7 @@
     bool LoggedIn = ViewBag.LoggedIn ?? false;
 }
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,7 +26,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if(!LoggedIn) {
+                    @if(!LoggedIn) { // Owen Ravelo
                         <li style="background-color: #591110;">@Html.ActionLink("Login", "Login", "Auth")</li>
                         <li>@Html.ActionLink("Sign Up", "SignUp", "Auth")</li>
                     } else
@@ -38,10 +38,9 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
         @*<footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>*@
