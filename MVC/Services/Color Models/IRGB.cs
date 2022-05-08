@@ -19,5 +19,7 @@ namespace Services.Color_Models
 
         [NumberSize(0, 255)]
         public int B { get; set; }
+
+        public float Distance(IRGB other);
     }
 }

@@ -156,5 +156,14 @@ namespace Services.Adapters
 
             return (Convert.ToInt32(r, 16), Convert.ToInt32(g, 16), Convert.ToInt32(b, 16));
         }
+
+        public float Distance(IRGB other)
+        {
+            if (_IRGB == null)
+            {
+                throw new Exception("Not an RGB");
+            }
+            return RGBModel.Distance(this, other);
+        }
     }
 }
