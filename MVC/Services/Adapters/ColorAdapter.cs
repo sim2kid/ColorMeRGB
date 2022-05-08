@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Services.Adapters
 {
     //Author: Sebastian Pedersen
+    // Owen Helped
     //Creation Date: May 7, 2022
     public class ColorAdapter : IHex, IRGB
     {
