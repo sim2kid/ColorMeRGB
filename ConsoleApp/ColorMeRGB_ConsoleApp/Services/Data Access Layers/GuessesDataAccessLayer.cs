@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Services.Data_Access_Layers
 {
+    //Author: Sebastian Pedersen
+    //Creation Date: April 22, 2022
     public class GuessesDataAccessLayer
     {
         private string sqlConnectString = string.Empty;

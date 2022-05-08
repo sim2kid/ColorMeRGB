@@ -9,6 +9,8 @@ using Services.Models;
 
 namespace Services.Data_Access_Layers
 {
+    //Author: Sebastian Pedersen
+    //Creation Date: April 22, 2022
     public class GamesDataAccessLayer
     {
         private string sqlConnectString = string.Empty;
