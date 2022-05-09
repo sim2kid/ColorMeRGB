@@ -1,12 +1,13 @@
 USE [ColorMeRGB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[GamesUpdateById]    Script Date: 5/3/2022 10:33:01 PM ******/
+/****** Object:  StoredProcedure [dbo].[GamesUpdateById]    Script Date: 5/9/2022 12:52:14 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 -- =============================================
 -- Author:		Sebastian Pedersen
@@ -16,7 +17,7 @@ GO
 CREATE PROCEDURE [dbo].[GamesUpdateById] 
 	-- Add the parameters for the stored procedure here
 	@GameID uniqueidentifier = null,
-	@AnswerColor int = null, 
+	@AnswerColor nvarchar(6) = null, 
 	@Timestamp datetime = null,
 	@Completed bit = null
 AS

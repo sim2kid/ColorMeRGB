@@ -1,12 +1,13 @@
 USE [ColorMeRGB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[GuessesInsertRecords]    Script Date: 5/3/2022 10:35:10 PM ******/
+/****** Object:  StoredProcedure [dbo].[GuessesInsertRecords]    Script Date: 5/9/2022 12:53:22 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 -- =============================================
 -- Author:		Sebastian Pedersen
@@ -15,7 +16,8 @@ GO
 -- =============================================
 CREATE PROCEDURE [dbo].[GuessesInsertRecords] 
 	-- Add the parameters for the stored procedure here
-	@GuessColor int = null, 
+	@GameId uniqueidentifier = null,
+	@GuessColor nvarchar(6) = null, 
 	@Distance float = null,
 	@Timestamp datetime = null,
 	@IsCorrect bit = null,
@@ -29,8 +31,8 @@ BEGIN
     -- Insert statements for procedure here
 	set @ReturnValue = NEWID()
 
-	insert into [ColorMeRGB].[dbo].[GuessesTable] ([id], [guess_color], [distance], [timestamp], [is_correct])
-	values (@ReturnValue, @GuessColor, @Distance, @Timestamp, @IsCorrect)
+	insert into [ColorMeRGB].[dbo].[GuessesTable] ([id], [game_id], [guess_color], [distance], [timestamp], [is_correct])
+	values (@ReturnValue, @GameId, @GuessColor, @Distance, @Timestamp, @IsCorrect)
 END
 GO
 

@@ -1,12 +1,13 @@
 USE [ColorMeRGB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[GamesGetAll]    Script Date: 5/3/2022 10:32:19 PM ******/
+/****** Object:  StoredProcedure [dbo].[GamesGetAll]    Script Date: 5/9/2022 12:50:47 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 -- =============================================
 -- Author:		Sebastian Pedersen

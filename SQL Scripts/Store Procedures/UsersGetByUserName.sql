@@ -1,12 +1,13 @@
 USE [ColorMeRGB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[UsersGetByUserName]    Script Date: 5/3/2022 10:36:37 PM ******/
+/****** Object:  StoredProcedure [dbo].[UsersGetByUserName]    Script Date: 5/9/2022 12:56:00 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 -- =============================================
 -- Author:		Sebastian Pedersen
