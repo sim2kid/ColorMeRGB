@@ -48,6 +48,7 @@ namespace MVC_Core.Controllers
             {
                 // No API Access
                 ModelState.AddModelError("", "Something went wrong...");
+                Logger.Logger.Instance.Warning("API is not accessible from MVC");
 
                 return View(model);
             }
@@ -110,6 +111,7 @@ namespace MVC_Core.Controllers
             {
                 // No API Access
                 ModelState.AddModelError("", "Something went wrong...");
+                Logger.Logger.Instance.Warning("API is not accessible from MVC");
 
                 return View(model);
             }

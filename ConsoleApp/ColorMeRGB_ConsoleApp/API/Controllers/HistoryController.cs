@@ -21,6 +21,7 @@ namespace API.Controllers
             // api authorized
             if (!apiKey.IsKeyValid(model.ApiKey))
             {
+                Logger.Logger.Instance.Warning($"Unauthorized access detected from {Request.HttpContext.Connection.RemoteIpAddress}");
                 return Unauthorized(new HistoryResponseModel()
                 {
                     Message = "Invalid API Key.",

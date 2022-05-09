@@ -31,6 +31,7 @@ namespace API.Controllers
         {
             if (!apiKey.IsKeyValid(auth.ApiKey))
             {
+                Logger.Logger.Instance.Warning($"Unauthorized access detected from {Request.HttpContext.Connection.RemoteIpAddress}");
                 return Unauthorized(new AuthResponseModel()
                 {
                     Message = "Invalid API Key.",
@@ -94,6 +95,7 @@ namespace API.Controllers
         {
             if (!apiKey.IsKeyValid(auth.ApiKey))
             {
+                Logger.Logger.Instance.Warning($"Unauthorized access detected from {Request.HttpContext.Connection.RemoteIpAddress}");
                 return Unauthorized(new AuthResponseModel()
                 {
                     Message = "Invalid API Key.",

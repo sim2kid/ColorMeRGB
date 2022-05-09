@@ -23,6 +23,7 @@ namespace API.Controllers
             // api authorized
             if (!apiKey.IsKeyValid(model.ApiKey))
             {
+                Logger.Logger.Instance.Warning($"Unauthorized access detected from {Request.HttpContext.Connection.RemoteIpAddress}");
                 return Unauthorized(new GameResponseModel()
                 {
                     Message = "Invalid API Key.",
@@ -81,6 +82,7 @@ namespace API.Controllers
             // api authorized
             if (!apiKey.IsKeyValid(model.ApiKey))
             {
+                Logger.Logger.Instance.Warning($"Unauthorized access detected from {Request.HttpContext.Connection.RemoteIpAddress}");
                 return Unauthorized(new GameResponseModel()
                 {
                     Message = "Invalid API Key.",
@@ -142,6 +144,7 @@ namespace API.Controllers
             // api authorized
             if (!apiKey.IsKeyValid(model.ApiKey))
             {
+                Logger.Logger.Instance.Warning($"Unauthorized access detected from {Request.HttpContext.Connection.RemoteIpAddress}");
                 return Unauthorized(new GameResponseModel()
                 {
                     Message = "Invalid API Key.",

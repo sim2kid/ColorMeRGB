@@ -73,6 +73,7 @@ namespace MVC_Core.Controllers
             {
                 // API Error
                 ModelState.AddModelError("", "An unknown error has occured...");
+                Logger.Logger.Instance.Warning("API is not accessible from MVC");
                 return View(model);
             }
             if (!newGameResponse.Authenticated) 
@@ -94,6 +95,7 @@ namespace MVC_Core.Controllers
             {
                 // API Error
                 ModelState.AddModelError("", "An unknown error has occured...");
+                Logger.Logger.Instance.Warning("API is not accessible from MVC");
                 return View(model);
             }
             if (!response.Authenticated)
@@ -138,6 +140,7 @@ namespace MVC_Core.Controllers
             {
                 // API Error
                 ModelState.AddModelError("", "An unknown error has occured...");
+                Logger.Logger.Instance.Warning("API is not accessible from MVC");
                 return View(model);
             }
             if (!response.Authenticated)
