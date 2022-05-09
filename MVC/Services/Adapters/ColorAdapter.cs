@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Services.Adapters
 {
     //Author: Sebastian Pedersen
+    // Owen Helped
     //Creation Date: May 7, 2022
     public class ColorAdapter : IHex, IRGB
     {
@@ -137,9 +139,9 @@ namespace Services.Adapters
             StringBuilder sbHex = new StringBuilder();
 
             //Convert each value to hex and then append it to sbHex
-            sbHex.Append(r.ToString("X"));
-            sbHex.Append(g.ToString("X"));
-            sbHex.Append(b.ToString("X"));
+            sbHex.Append(r.ToString("X2"));
+            sbHex.Append(g.ToString("X2"));
+            sbHex.Append(b.ToString("X2"));
 
             //set Hex equal to sbHex
             return sbHex.ToString();
@@ -165,5 +167,7 @@ namespace Services.Adapters
             }
             return RGBModel.Distance(this, other);
         }
+
+        public bool isDark => ((R + G + B) / 3f) < (255f * 0.44);
     }
 }

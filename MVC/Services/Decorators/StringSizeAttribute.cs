@@ -45,9 +45,9 @@ AllowMultiple = false, Inherited = true)]
         }
 
         //Make sure string is valid based on requirements
-        public override bool IsValid(object value)
+        public override bool IsValid(object? value)
         {
-            if (value == null || value is not string || ((string)value).Length > MaxLength || ((string)value).Length < MinLength || !((string)value).All(char.IsLetterOrDigit))
+            if (value == null || value is not string || ((string)value).Length > MaxLength || ((string)value).Length < MinLength)
             {
                 return false;
             }

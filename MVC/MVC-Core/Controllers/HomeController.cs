@@ -4,31 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+// Written by Owen Ravelo
+
 namespace MVC_Core.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult SignUp()
-        {
-            return View();
-        }
-
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        public ActionResult Game()
-        {
-            return View();
-        }
-
-        public ActionResult History()
         {
             return View();
         }

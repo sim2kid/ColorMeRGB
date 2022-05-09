@@ -1,4 +1,6 @@
 ﻿using System.Text.Json.Serialization;
+using System.Linq;
+using Services.Color_Models;
 
 // Written by Owen Ravelo
 namespace Services.Models
@@ -16,6 +18,9 @@ namespace Services.Models
 
         [JsonPropertyName("answers")]
         public List<AnswerModel> Answers { get; set; } = new List<AnswerModel>();
+
+        public bool hasCorrectAnswer => Answers.Any(x => x.IsCorrect);
+        public IRGB rgb => new Adapters.ColorAdapter(new HexModel(CorrectAnswer));
 
         public GameModel() { }
     }

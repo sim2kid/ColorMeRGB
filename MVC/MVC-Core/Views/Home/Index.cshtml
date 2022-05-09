@@ -1,5 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "ColorMe RGB";
+    // Written by Owen Ravelo
+    bool LoggedIn = ViewBag.LoggedIn ?? false;
 }
 
 @*Created by Gabriel Willemssen*@
@@ -41,11 +43,11 @@
         border: 2px solid deepskyblue;
     }
 
-        .button1:hover {
-            background-color: white;
-            color: deepskyblue;
-            border: 2px solid deepskyblue;
-        }
+    .button1:hover {
+        background-color: white;
+        color: deepskyblue;
+        border: 2px solid deepskyblue;
+    }
 
     .center {
         display: flex;
@@ -57,12 +59,20 @@
     }
 </style>
 
-<p id="para1">ColorMe RGB</p>
+<main>
+    <p id="para1">ColorMe RGB</p>
 
-<div class="center">
-    <button class="button button1" onclick="location.href = '@Url.Action("Game","Home")'">Play!</button>
-</div>
-
+    <div class="center">
+        @if (LoggedIn) // Owen Ravelo
+        {
+            <button class="button button1" onclick="location.href='@Url.Action("Index","Game")'">Play!</button>
+        } 
+        else
+        {
+            <button class="button button1" onclick="location.href='@Url.Action("Login","Auth")'">Login!</button>
+        }
+    </div>
+</main>
 
 
 @*<div class="jumbotron">

@@ -1,0 +1,280 @@
+﻿@model MVC_Core.Models.GameFormModel
+@{
+    ViewBag.Title = "Game";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    GameModel Game = ViewBag.Game ?? new GameModel();
+    string extraClassA = Game.Guesses.Count == 0 ? "ignore" : string.Empty;
+    string extraClassB = Game.Guesses.Count == 0 ? "min" : string.Empty;
+}
+
+
+@*Created by Gabriel Willemssen*@
+<style>
+    body {
+        background-color: white;
+        background-image: linear-gradient(white, skyblue);
+        background-attachment: fixed;
+        font-family: Tahoma, Verdana, sans-serif;
+    }
+
+    .square {
+        margin: 10px;
+        width: 200px;
+        height: 200px;
+        border-radius: 5px;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center; /* align vertical */
+        flex-wrap: nowrap;
+        flex-direction:column;
+        box-shadow: 5px 5px 10px #888;
+        transition: all 1s ease;
+        position: relative;
+    }
+
+    .square:hover {
+        transform: translate(-3px, -3px) scale(1.01);
+        box-shadow: 10px 10px 15px #888;
+    }
+
+    .flex-container {
+        flex-direction: row;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+
+    .ans-container {
+        flex-direction: column;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    .column {
+        flex-grow: 1;
+    }
+
+    .form-flex {
+        flex-direction: row;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    [for="R"] {
+        margin-left: 0;
+    }
+    div > label {
+        margin: 0 0.5ch 0 1ch;
+        flex-grow: 0;
+    }
+    div > input {
+        flex-grow: 1;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .invert {
+        color: #EEE;
+    }
+
+    .new-guess {
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        animation-name: slideInBottom;
+        animation-direction: normal;
+        animation-iteration-count: 1;
+    }
+
+    .guess {
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        animation-name: shuffle;
+        animation-direction: normal;
+        animation-iteration-count: 1;
+    }
+
+    @@keyframes shuffle {
+        0% {
+            transform: translateY(-20px);
+        }
+        90% {
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes slideInBottom {
+        0% {
+            transform: translateY(-200%);
+        }
+        90% {
+            transform: translateY(20px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+    
+
+    /* Phone Size */
+    @@media (max-width: 800px) {
+        .flex-container {
+            flex-direction: column;
+            row-gap: 20px;
+        }
+        #input {
+            position: relative;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        
+    }
+    /* Desktop Size */
+    @@media (min-width: 800px) {
+        #input {
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(calc(calc(21.25ch + 20px) * -2));
+            position: fixed;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: max-content;
+        }
+
+        .ignore {
+            top: 0px !important;
+            left: 0px !important;
+            transform: none !important;
+            position: static !important;
+            justify-content: center !important;
+            align-items: center !important;
+            margin: auto !important;
+            height: 100%;
+        }
+        .flex-container {
+            align-items: flex-start;
+        }
+        .column {
+            width: 50%;
+            height: 100vh;
+        }
+        .ans-container 
+        {
+            width: 50%;
+            min-height: 100vh;
+        }
+    }
+
+    .min 
+    {
+        flex-grow: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+
+    input[type=number], select {
+        width: 10ch;
+        padding: 12px 10px;
+        margin: 8px auto;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 42.5ch;
+        background-color: deepskyblue;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    input[type=submit]:hover {
+        background-color: skyblue;
+        color: #666;
+    }
+
+    .border {
+        width: max-content;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        font-family: Tahoma, Verdana, sans-serif;
+        box-shadow: 5px 5px 10px #888;
+    }
+</style>
+<script>
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
+function ensureInBounds(id) 
+{
+    let input = document.getElementById(id);
+    input.value = clamp(input.value, 0, 255);
+}
+</script>
+
+<main>
+    <div class="flex-container">
+        <div class="column @extraClassA">
+            <div id="input" class="@extraClassA">
+                <div class="square" style="background-color: rgb(@Game.Answer.R, @Game.Answer.G, @Game.Answer.B);"></div>
+                <div class="border">
+                    @using (Html.BeginForm()) { // Owen
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-flex">
+                            @Html.LabelFor(model => model.R)
+                            <input type="number" min="0" max="255" value="@Model.R" 
+                            onchange="ensureInBounds('rValue')" id="rValue" name="R">
+                            @Html.ValidationMessageFor(model => model.R, "", new { @class = "text-danger" })
+
+                            @Html.LabelFor(model => model.G)
+                            <input type="number" min="0" max="255" value="@Model.G" 
+                            onchange="ensureInBounds('gValue')" id="gValue" name="G">
+                            @Html.ValidationMessageFor(model => model.G, "", new { @class = "text-danger" })
+
+                            @Html.LabelFor(model => model.B)
+                            <input type="number" min="0" max="255" value="@Model.B" 
+                            onchange="ensureInBounds('bValue')" id="bValue" name="B">
+                            @Html.ValidationMessageFor(model => model.B, "", new { @class = "text-danger" })
+                            <br>
+                         </div>
+                        <input type="submit" value="Guess!">
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="ans-container @extraClassB">
+            @for(int i = 0; i < Game.Guesses.Count; i++) {
+                var guess = Game.Guesses[i];
+                <div class="square@(guess.Color.isDark?" invert":"") @(i == 0 ? "new-guess": "guess")" style="background-color: rgb(@guess.Color.R, @guess.Color.G, @guess.Color.B);">
+                    <p><b>R: </b>@guess.Color.R <b>G: </b>@guess.Color.G <b>B: </b>@guess.Color.B</p>
+                    <p>Distance: <b>@guess.Distance.ToString("0")</b></p>
+                </div>
+            }
+        </div>
+    </div>
+
+
+</main>

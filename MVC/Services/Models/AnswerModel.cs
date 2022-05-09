@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Services.Color_Models;
+using System.Text.Json.Serialization;
 
 // Written by Owen Ravelo
 namespace Services.Models
@@ -16,6 +17,8 @@ namespace Services.Models
 
         [JsonPropertyName("is_correct")]
         public bool IsCorrect { get; set; }
+
+        public IRGB rgb => new Adapters.ColorAdapter(new HexModel(GuessColor));
 
         public AnswerModel() { }
     }

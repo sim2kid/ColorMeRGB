@@ -21,5 +21,7 @@ namespace Services.Color_Models
         public int B { get; set; }
 
         public float Distance(IRGB other);
+
+        public bool isDark { get; }
     }
 }
