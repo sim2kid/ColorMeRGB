@@ -161,9 +161,9 @@ namespace Services.Adapters
 
         public float Distance(IRGB other)
         {
-            if (_IRGB == null)
+            if (_IHex == null)
             {
-                throw new Exception("Not an RGB");
+                throw new Exception("Not a Hex");
             }
             return RGBModel.Distance(this, other);
         }

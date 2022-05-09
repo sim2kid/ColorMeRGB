@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 // Written by Owen Ravelo
-
+// Can't be tested
 namespace Services
 {
     public class ApiKeyService
