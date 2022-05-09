@@ -1,2 +1,168 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Services.Adapters.ColorAdapter" Collapsed="true">
+    <Position X="1.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAgAAAAAAEAAAAAIAABgAAAACAEAAQA=</HashCode>
+      <FileName>Adapters\ColorAdapter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Services.Color_Models.HexModel" Collapsed="true">
+    <Position X="5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Color Models\HexModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Services.Color_Models.RGBModel" Collapsed="true">
+    <Position X="3.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAABAAAAACAEAAQA=</HashCode>
+      <FileName>Color Models\RGBModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Services.Decorators.NumberSizeAttribute" Collapsed="true">
+    <Position X="8.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Decorators\NumberSizeAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Decorators.PasswordContainsAttribue" Collapsed="true">
+    <Position X="13.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Decorators\PasswordContainsAttribue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Decorators.StringSizeAttribute" Collapsed="true">
+    <Position X="6.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Decorators\StringSizeAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Game.GenerateHexService">
+    <Position X="10.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\GenerateHexService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Models.AnswerModel">
+    <Position X="12" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgCCAAAAAAAAAABAAAIAAAAAAAA=</HashCode>
+      <FileName>Models\AnswerModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Models.AuthRequestModel">
+    <Position X="13.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAgAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AuthRequestModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Models.AuthResponseModel">
+    <Position X="1.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAQAAAAAAAAAAAAAAgAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\AuthResponseModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Models.GameModel">
+    <Position X="3.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAgACAAAAAAACAABAQAAAAAAAAAA=</HashCode>
+      <FileName>Models\GameModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Models.GameRequestModel">
+    <Position X="5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAEAgAAAABAAAgBAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\GameRequestModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Models.GameResponseModel">
+    <Position X="6.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAwAAAAAAAEAAAAAAgAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\GameResponseModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Models.HistoryRequestModel">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\HistoryRequestModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Models.HistoryResponseModel">
+    <Position X="10.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAwAAAAAAAAAAAAAAgAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\HistoryResponseModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Models.UserModel">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABCAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAA=</HashCode>
+      <FileName>Models\UserModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.Utilities.HashUtil">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\HashUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.WebRequest.APICall">
+    <Position X="13.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAgAAgBABFCAAAAAASBAAAAAA=</HashCode>
+      <FileName>WebRequest\APICall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.AuthService">
+    <Position X="5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAACAQAAAAAAA=</HashCode>
+      <FileName>AuthService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.GameService">
+    <Position X="10.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAACFAAAAAAAEAAAAABACAAAgAACAAAAAAAAA=</HashCode>
+      <FileName>GameService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.HistoryService">
+    <Position X="12" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>HistoryService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Services.Color_Models.IHex" Collapsed="true">
+    <Position X="6.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Color Models\IHex.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.Color_Models.IRGB" Collapsed="true">
+    <Position X="8.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAABAAAAACAEAAQA=</HashCode>
+      <FileName>Color Models\IRGB.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
