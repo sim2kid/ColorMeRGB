@@ -14,6 +14,7 @@ namespace Services
     public class GameService
     {
         WebRequest.APICall api = new WebRequest.APICall();
+        //hardcoded properties
         readonly int maxGuesses = 6;
         readonly float closenessCutoff = 15;
 
