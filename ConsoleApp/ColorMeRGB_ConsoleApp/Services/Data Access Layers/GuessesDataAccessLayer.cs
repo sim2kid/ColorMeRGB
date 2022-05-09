@@ -15,12 +15,20 @@ namespace Services.Data_Access_Layers
     {
         private string sqlConnectString = string.Empty;
         private DataBaseConnectionSingleton connectionSingleton;
+
+        //Establish a connection to the database
         public GuessesDataAccessLayer()
         {
             connectionSingleton = DataBaseConnectionSingleton.Instance();
             this.sqlConnectString = connectionSingleton.PrepareDBConnection();
         }
 
+
+        /// <summary>
+        /// Insert records into the guesses database
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns>The id of the stored record</returns>
         public Guid GuessesInsertRecords(GuessRecordModel record)
         {
             //Make sure we reference the proper connection

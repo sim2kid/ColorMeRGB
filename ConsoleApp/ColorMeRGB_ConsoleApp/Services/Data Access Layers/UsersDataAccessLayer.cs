@@ -15,12 +15,19 @@ namespace Services.Data_Access_Layers
     {
         private string sqlConnectString = string.Empty;
         private DataBaseConnectionSingleton connectionSingleton;
+
+        //Establish a connection to the database
         public UsersDataAccessLayer()
         {
             connectionSingleton = DataBaseConnectionSingleton.Instance();
             this.sqlConnectString = connectionSingleton.PrepareDBConnection();
         }
 
+        /// <summary>
+        /// Insert records into the users table
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns>The id of the user record inserted</returns>
         public Guid UsersInsertRecords(UserRecordModel record)
         {
             //Make sure we reference the proper connection
@@ -224,6 +231,7 @@ namespace Services.Data_Access_Layers
             }
         }
 
+        //Map to the model in Services.Models so it can be used and referenced by this C# solution
         private UserRecordModel MapToModel(SqlDataReader? result)
         {
             UserRecordModel model = new UserRecordModel();

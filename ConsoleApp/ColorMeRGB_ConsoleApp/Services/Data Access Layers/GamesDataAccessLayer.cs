@@ -16,6 +16,7 @@ namespace Services.Data_Access_Layers
         private string sqlConnectString = string.Empty;
         private DataBaseConnectionSingleton connectionSingleton;
 
+        //Establish a connection to the database
         public GamesDataAccessLayer()
         {
             connectionSingleton = DataBaseConnectionSingleton.Instance();
@@ -228,6 +229,7 @@ namespace Services.Data_Access_Layers
             }
         }
 
+        //Map to the model in Services.Models so it can be used and referenced by this C# solution
         private GameRecordModel MapToModel(SqlDataReader? result)
         {
             GameRecordModel model = new GameRecordModel();

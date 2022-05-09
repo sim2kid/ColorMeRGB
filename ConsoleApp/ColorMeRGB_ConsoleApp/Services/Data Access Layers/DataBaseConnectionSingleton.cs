@@ -16,6 +16,7 @@ namespace Services.Data_Access_Layers
         //use this to reference the DB connection
         private static SqlConnectionStringBuilder connectionBuilder;
 
+        //make sure there is only one instance of the reference to the database
         public static DataBaseConnectionSingleton Instance()
         {
             if (instance == null)
@@ -28,6 +29,7 @@ namespace Services.Data_Access_Layers
 
         private DataBaseConnectionSingleton() { }
 
+        //Create the reference that will be used to connect to the db
         public string PrepareDBConnection()
         {
             connectionBuilder.DataSource = $"(localdb)\\MSSQLLocalDB";
