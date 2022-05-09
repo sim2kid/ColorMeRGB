@@ -204,35 +204,7 @@ namespace Services.Data_Access_Layers
             return statList;
         }
 
-        /// <summary>
-        /// Delete the row with corresponding "id" parameter
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>String that declares failure or success</returns>
-        public string GuessesDeleteByID(Guid id)
-        {
-            //Make sure we reference the proper connection
-            using (SqlConnection conn = new SqlConnection(sqlConnectString))
-            {
-                //Use this to reference the Stored Proceure that we are using for this operation
-                using (SqlCommand sqlCommand = new SqlCommand("[dbo].[GuessesDeleteByID]", conn))
-                {
-                    //Specify the interpretation of the command string
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                    //the parameter used to find the row with the corresponding ID that was passed in
-                    sqlCommand.Parameters.AddWithValue("@ID", id).Direction = ParameterDirection.Input;
-                    sqlCommand.Parameters.Add("@ReturnValue", SqlDbType.Int).Direction = ParameterDirection.Output;
-
-                    conn.Open();
-                    //if the stored procedure executed properly, then return a string that declared success. Else, return a string that declares failure
-                    string result = sqlCommand.ExecuteNonQuery() == 0 ? "Operation Failed" : "Operation Success";
-                    conn.Close();
-                    return result;
-                }
-            }
-        }
-
+        //Map to the model in Services.Models so it can be used and referenced by this C# solution
         private GuessRecordModel MapToModel(SqlDataReader? result)
         {
             GuessRecordModel model = new GuessRecordModel();

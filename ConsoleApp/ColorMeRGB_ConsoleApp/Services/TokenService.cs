@@ -21,16 +21,24 @@ namespace Services
             return token;
         }
 
-        public bool TokenIsValid(string token) 
+        public bool TokenIsValid(string token)
         {
-            var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
+            try
+            {
+                var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
 
-            var now = DateTime.Now;
+                var now = DateTime.Now;
 
-            if (jwt.ValidFrom > now || jwt.ValidTo < now) 
+                if (jwt.ValidFrom > now || jwt.ValidTo < now)
+                {
+                    return false;
+                }
+            }
+            catch
             {
                 return false;
             }
+
             return true;
         }
 
