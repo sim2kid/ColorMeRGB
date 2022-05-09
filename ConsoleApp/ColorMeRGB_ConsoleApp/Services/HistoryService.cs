@@ -21,10 +21,14 @@ namespace Services
                 var model = new GameModel(record);
                 var answerRecords = uDal.GuessessGetByGameId(model.Id);
 
+                if(answerRecords == null || answerRecords.Count <= 0)
+                {
+                    continue;
+                }
+
                 foreach (var answer in answerRecords) {
                     model.Answers.Add(new AnswerModel(answer));
                 }
-
                 model.Answers.Sort((x, y) => -x.Timestamp.CompareTo(y.Timestamp));
                 result.Add(model);
             }
