@@ -6,6 +6,7 @@ using Services.Models;
 
 namespace MVC_Core.Controllers
 {
+    [Route("[controller]")]
     public class HistoryController : BaseController
     {
         HistoryService past = new HistoryService();

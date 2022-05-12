@@ -24,26 +24,30 @@ namespace Logger
 
         public override void Log(ILogger.LogLevel level, string message, Guid? user = null, string? exception = null)
         {
-            using (SqlConnection conn = new SqlConnection(connection.ConnectionString)) 
+            try
             {
-                using (SqlCommand sqlCommand = new SqlCommand("[dbo].[Log]", conn)) 
+                using (SqlConnection conn = new SqlConnection(connection.ConnectionString))
                 {
-                    //Specify the interpretation of the command string
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand sqlCommand = new SqlCommand("[dbo].[Log]", conn))
+                    {
+                        //Specify the interpretation of the command string
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                    //Pass the proper values into the parameters of the stored procedure
-                    sqlCommand.Parameters.AddWithValue("@source", "").Direction = ParameterDirection.Input; // Left blank for now
-                    sqlCommand.Parameters.AddWithValue("@level", level.ToString()).Direction = ParameterDirection.Input;
-                    sqlCommand.Parameters.AddWithValue("@userid", user).Direction = ParameterDirection.Input;
-                    sqlCommand.Parameters.AddWithValue("@message", message).Direction = ParameterDirection.Input;
-                    sqlCommand.Parameters.AddWithValue("@@exception", exception).Direction = ParameterDirection.Input;
+                        //Pass the proper values into the parameters of the stored procedure
+                        sqlCommand.Parameters.AddWithValue("@source", "").Direction = ParameterDirection.Input; // Left blank for now
+                        sqlCommand.Parameters.AddWithValue("@level", level.ToString()).Direction = ParameterDirection.Input;
+                        sqlCommand.Parameters.AddWithValue("@userid", user).Direction = ParameterDirection.Input;
+                        sqlCommand.Parameters.AddWithValue("@message", message).Direction = ParameterDirection.Input;
+                        sqlCommand.Parameters.AddWithValue("@@exception", exception).Direction = ParameterDirection.Input;
 
 
-                    conn.Open(); //open the connection with the previously established reference
-                    sqlCommand.ExecuteNonQuery(); //execute the stored procedure
-                    conn.Close(); //close the connection
+                        conn.Open(); //open the connection with the previously established reference
+                        sqlCommand.ExecuteNonQuery(); //execute the stored procedure
+                        conn.Close(); //close the connection
+                    }
                 }
             }
+            catch { }
         }
     }
 }

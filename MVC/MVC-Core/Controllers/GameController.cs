@@ -11,6 +11,7 @@ using System.Web;
 
 namespace MVC_Core.Controllers
 {
+    [Route("[controller]")]
     public class GameController : BaseController
     {
         GameService game = new GameService();

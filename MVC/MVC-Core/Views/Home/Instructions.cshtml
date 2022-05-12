@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "How To Play";
+}
+<style>
+    body {
+        background-color: white;
+        background-image: linear-gradient(white, skyblue);
+        background-attachment: fixed;
+        font-family: Tahoma, Verdana, sans-serif;
+    }
+    .center {
+        width: max-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<main style="max-width: 70ch;" class="center">
+    <h1 class="center">@ViewData["Title"]</h1>
+    <h2>Instructions</h2>
+    <p>
+        When on the Game Page, you'll have the option to put in the color values for the displayed color.
+    </p>
+    <p>
+        Your guesses, their color, and their distance to the answer's values will be displayed on the right hand side (or bottom on smaller screens).
+    </p>
+    <p>
+        That would include the Red (R), Green (G), and Blue (B) values that represent the color.
+    </p>
+    <p>
+        These values will be between 0 and 255.
+    </p>
+    <p>
+        You'll have 6 guesses to get within a distance of 15.
+    </p>
+    <p>
+        After the end of the game, you'll be taken to your history to see the correct answer and your guesses.
+    </p>
+    <h2>What is RGB?</h2>
+    <p>
+        Color can be described in two main ways. An additive way and a Subtractive way.
+    </p>
+    <p>
+        Most people know the subtractive way with the primary colors of Red, Yellow, and Blue. This is how paint works. You can add pigment together and blend colors. You start with white and slowly take away light to get the color you want (thus the name subtractive).
+    </p>
+    <p>
+        Alternitivly, you can start with black and add colors together until you get a new color. That process uses the primary colors of Red, Green, and Blue!
+    </p>
+    <p>
+        This process exploits the fact that our eyes are sensitive to these 3 colors and can't distinguish between "Yellow" and "Red and Green".
+    </p>
+    <p>
+        All computers, phones, and TVs use this to display over 16.77 million different colors!
+    </p>
+    <p>
+        In this game, we test your ability to guess what those colors are. You combine different amounts of those colors to produce a new color.
+    </p>
+</main>

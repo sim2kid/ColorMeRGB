@@ -5,6 +5,7 @@ using MVC_Core.Models;
 
 namespace MVC_Core.Controllers
 {
+    [Route("[controller]")]
     public class AuthController : BaseController
     {
         Services.AuthService auth = new Services.AuthService();

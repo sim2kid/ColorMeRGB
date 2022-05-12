@@ -16,12 +16,13 @@ namespace Services.WebRequest
     {
         private readonly HttpClient client = new HttpClient();
         private readonly string ApiKey = "ZMpNcnWQUGAsyf66QC2ntk46VFFUfKTL";
-        private readonly string ApiUrl = "https://localhost:7259/api/";
+        private readonly string ApiUrl = "https://localhost:44069/api/";
 
         public APICall() 
         {
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("User-Agent", ".NET Asp-Net MVC");
+            client.Timeout = TimeSpan.FromSeconds(5);
         }
 
         private T? Deserialize<T>(string? json)
@@ -55,32 +56,39 @@ namespace Services.WebRequest
                 Content = new StringContent(body, Encoding.UTF8, "application/json"),
             };
 
-            var response = await client.SendAsync(request);
-            var result = await response.Content.ReadAsStringAsync();
-            return result ?? null;
+            try
+            {
+                var response = await client.SendAsync(request);
+                var result = await response.Content.ReadAsStringAsync();
+                return result ?? null;
+            }
+            catch 
+            {
+                return null;
+            }
         }
 
-        public async Task<AuthResponseModel?> Signup(string username, string password) 
+        public async Task<AuthResponseModel?> Signup(string username, string hashword) 
         {
             string url = ApiUrl + "auth/signup";
             AuthRequestModel model = new AuthRequestModel() {
                 ApiKey = ApiKey,
                 Username = username,
-                Password = password
+                Password = hashword
             };
             string? result = await MakeRequest(url, HttpMethod.Post, model);
             AuthResponseModel? response = Deserialize<AuthResponseModel>(result);
             return response;
         }
 
-        public async Task<AuthResponseModel?> Login(string username, string password)
+        public async Task<AuthResponseModel?> Login(string username, string hashword)
         {
             string url = ApiUrl + "auth/login";
             AuthRequestModel model = new AuthRequestModel()
             {
                 ApiKey = ApiKey,
                 Username = username,
-                Password = password
+                Password = hashword
             };
             string? result = await MakeRequest(url, HttpMethod.Post, model);
             AuthResponseModel? response = Deserialize<AuthResponseModel>(result);

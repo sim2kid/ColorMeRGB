@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html style="height: 100%; width: 100%">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +8,21 @@
     <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="~/css/bootstrap-theme.css rel="stylesheet" type="text/css">
     <script src="~/js/modernizr-2.8.3.js"></script>
+    <style>
+        a {
+            color: #C22731;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: #6b6e74;
+        }
+    </style>
 </head>
 @{
     // Written by Owen Ravelo
     bool LoggedIn = ViewBag.LoggedIn ?? false;
 }
-<body>
+<body style="min-height: 100%; display: flex; flex-direction: column;">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -33,6 +42,10 @@
                     {
                         <li>@Html.ActionLink("Play", "Index", "Game")</li>
                         <li>@Html.ActionLink("History", "Index", "History")</li>
+                    }
+                    <li>@Html.ActionLink("How To Play", "Instructions", "Home")</li>
+                    <li>@Html.ActionLink("Credits", "Credits", "Home")</li>
+                    @if(LoggedIn) {
                         <li>@Html.ActionLink("Logout", "Logout", "Auth")</li>
                     }
                 </ul>
@@ -41,11 +54,22 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; Created by Owen Ravelo, Sebastian Pedersen, and Gabriel Willemssen</p>
-        </footer>
     </div>
+    <footer style="width:100%; margin-top: auto;" class="container body-content">
+            <div style="margin: 10px 60px;">
+                <hr />
+                <div>
+                    <p style="width: max-content; margin: 0px auto;">
+                        &copy;2022-@DateTime.Now.ToString("yyyy") Created by Owen Ravelo, Sebastian Pedersen, and Gabriel Willemssen 
+                    </p>
+                    <p style="width: max-content; margin: 0px auto;">
+                        @Html.ActionLink("Privacy", "Privacy", "Home") 
+                        • @Html.ActionLink("Credits", "Credits", "Home")
+                        • @Html.ActionLink("Cookies", "Cookies", "Home")
+                    </p>
+                </div>
+            </div>
+        </footer>
 
     <script src="~/js/jquery-3.4.1.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>

@@ -97,10 +97,48 @@
     .correct {
         box-shadow: 5px 5px 10px darkgreen;
     }
+
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+        width: max-content;
+    }
+
+    .button {
+        background-color: deepskyblue;
+        border: none;
+        color: white;
+        padding: 15px 40px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-family: Tahoma, Verdana, sans-serif;
+        font-size: 24px;
+        cursor: pointer;
+        border-radius: 16px;
+        transition-duration: 0.4s;
+    }
+
+    .button1 {
+        background-color: deepskyblue;
+        color: white;
+        border: 2px solid deepskyblue;
+    }
+
+    .button1:hover {
+        background-color: white;
+        color: deepskyblue;
+        border: 2px solid deepskyblue;
+    }
 </style>
 
 <main>
     <div class="history">
+        @if (Model.Count() == 0)
+        {
+            <h1 class="center">No Games Yet?</h1>
+            <button class="center button button1" onclick="location.href='@Url.Action("Index","Game")'">Play Now</button>
+        }
         @foreach(var game in Model) { // Owen
         <div>
             <h2>@game.Timestamp.ToString("f")</h2>

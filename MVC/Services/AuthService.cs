@@ -22,14 +22,14 @@ namespace Services
         public async Task<AuthResponseModel> Login(string username, string password) 
         {
             string hashword = Utilities.HashUtil.HashPassword(password);
-            var response = await api.Login(username, password);
+            var response = await api.Login(username, hashword);
             return response ?? new AuthResponseModel() { Authorized = false, Success = false };
         }
 
         public async Task<AuthResponseModel> Signup(string username, string password) 
         {
             string hashword = Utilities.HashUtil.HashPassword(password);
-            var response = await api.Signup(username, password);
+            var response = await api.Signup(username, hashword);
             return response ?? new AuthResponseModel() { Authorized = false, Success = false };
         }
     }

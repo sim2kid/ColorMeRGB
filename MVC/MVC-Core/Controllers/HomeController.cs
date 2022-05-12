@@ -14,5 +14,28 @@ namespace MVC_Core.Controllers
         {
             return View();
         }
+
+        [Route("privacy")]
+        public ActionResult Privacy()
+        {
+            return View();
+        }
+
+        [Route("credits")]
+        public ActionResult Credits()
+        {
+            return View();
+        }
+
+        [Route("how-to-play")]
+        public ActionResult Instructions()
+        {
+            return View();
+        }
+        [Route("cookies")]
+        public ActionResult Cookies()
+        {
+            return View();
+        }
     }
 }

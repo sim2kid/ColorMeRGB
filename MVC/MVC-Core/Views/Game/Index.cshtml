@@ -238,6 +238,9 @@ function ensureInBounds(id)
         <div class="column @extraClassA">
             <div id="input" class="@extraClassA">
                 <div class="square" style="background-color: rgb(@Game.Answer.R, @Game.Answer.G, @Game.Answer.B);"></div>
+                <div style="margin: 0 auto; width: max-content;">
+                    <h3 style="margin: 10px auto; width: max-content;">What is this color?</h3>
+                </div>
                 <div class="border">
                     @using (Html.BeginForm()) { // Owen
                         @Html.AntiForgeryToken()
