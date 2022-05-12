@@ -35,9 +35,9 @@ namespace MVC_Core.Models
         public GameFormModel() 
         {
             var r = new Random();
-            R = r.Next(0,255);
-            G = r.Next(0,255);
-            B = r.Next(0,255);
+            R = 0;
+            G = 0;
+            B = 0;
         }
     }
 }

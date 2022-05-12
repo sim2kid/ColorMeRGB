@@ -16,7 +16,7 @@ namespace Services.WebRequest
     {
         private readonly HttpClient client = new HttpClient();
         private readonly string ApiKey = "ZMpNcnWQUGAsyf66QC2ntk46VFFUfKTL";
-        private readonly string ApiUrl = "https://localhost:44069/api/";
+        private readonly string ApiUrl = "http://localhost:44069/api/";
 
         public APICall() 
         {

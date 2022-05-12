@@ -88,8 +88,6 @@
         width: 100%;
     }
 
-    
-    
     .wellRounded {
         border-radius: 5px !important;
     }
@@ -130,6 +128,43 @@
         color: deepskyblue;
         border: 2px solid deepskyblue;
     }
+
+    @@media only screen and (max-width: 767px) {
+       .flex-container {
+          flex-direction: row;
+          min-height: 16rem;
+       }
+       .answer {
+            height: 8rem;
+       }
+       .square {
+          height: auto;
+          width: 50%;
+          flex-grow: 5;
+          border-radius: 5px 0 0 5px;
+       }
+       .answers {
+            flex-direction: column;
+            width: 50%;
+       }
+       .answer-first {
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 5px;
+        }
+        .break {
+            display: none !important;
+        }
+    }
+
+    .break {
+        display: none;
+    }
+
+    @@media only screen and (max-width: 992px) {
+       .break {
+           display: inline;
+       }
+    }
 </style>
 
 <main>
@@ -148,12 +183,22 @@
                     <p><b>R: </b>@game.rgb.R <b>G: </b>@game.rgb.G <b>B: </b>@game.rgb.B</p>
                 </div>
                 <div id="answers" class="answers">
+                    @{
+                        string br = (game.Answers.Count >= 4 ? "<br class='break'>" : "");
+                    }
                     @for(int i = 0; i < game.Answers.Count; i++) {
                         var answer = game.Answers[i];
                         string extraClass = ((i==0) ? " answer-first" : string.Empty) + ((i == game.Answers.Count - 1) ? " answer-last" : string.Empty);
                         <div class="answer@(extraClass)@(answer.rgb.isDark?" invert":"")" style="background-color: #@answer.GuessColor">
-                            <p><b>R: </b>@answer.rgb.R <b>G: </b>@answer.rgb.G <b>B: </b>@answer.rgb.B</p>
-                            <p>Distance: <b>@answer.Distance.ToString("0")</b></p>
+                            <p>
+                                <b>R: </b>@answer.rgb.R @Html.Raw(br)
+                                <b>G: </b>@answer.rgb.G @Html.Raw(br)
+                                <b>B: </b>@answer.rgb.B</p>
+                            @Html.Raw(br)
+                            <p>
+                                Distance: @Html.Raw(br)
+                                <b>@answer.Distance.ToString("0")</b>
+                            </p>
                         </div>
                     }
                 </div>

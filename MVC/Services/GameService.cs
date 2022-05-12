@@ -46,7 +46,7 @@ namespace Services
 
         public bool hasWin(IRGB answer, IRGB guess) 
         {
-            return answer.Distance(guess) < closenessCutoff;
+            return answer.Distance(guess) <= closenessCutoff;
         }
 
         public bool hasEnd(int count)

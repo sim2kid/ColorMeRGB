@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - ColorMe RGB</title>
     <link href="~/css/site.css" rel="stylesheet" type="text/css">
     <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="~/css/bootstrap-theme.css rel="stylesheet" type="text/css">
@@ -17,6 +17,7 @@
             color: #6b6e74;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 @{
     // Written by Owen Ravelo
@@ -31,7 +32,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Color Me RGB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("ColorMe RGB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -52,17 +53,17 @@
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="container body-content" style="max-width: 100vw;">
         @RenderBody()
     </div>
     <footer style="width:100%; margin-top: auto;" class="container body-content">
             <div style="margin: 10px 60px;">
                 <hr />
                 <div>
-                    <p style="width: max-content; margin: 0px auto;">
+                    <p style="width: max-content; max-width: 100%; margin: 0px auto;">
                         &copy;2022-@DateTime.Now.ToString("yyyy") Created by Owen Ravelo, Sebastian Pedersen, and Gabriel Willemssen 
                     </p>
-                    <p style="width: max-content; margin: 0px auto;">
+                    <p style="width: max-content; max-width: 100%; margin: 0px auto;">
                         @Html.ActionLink("Privacy", "Privacy", "Home") 
                         • @Html.ActionLink("Credits", "Credits", "Home")
                         • @Html.ActionLink("Cookies", "Cookies", "Home")
