@@ -45,7 +45,7 @@ namespace Services.WebRequest
         /// <param name="verb">The http verb to use</param>
         /// <param name="body">The json content as a string</param>
         /// <returns>Json object string</returns>
-            private async Task<string?> MakeRequest(string url, HttpMethod verb, object requestBody) 
+        private async Task<string?> MakeRequest(string url, HttpMethod verb, object requestBody) 
         {
             string body = JsonSerializer.Serialize(requestBody);
             HttpRequestMessage request = new HttpRequestMessage()

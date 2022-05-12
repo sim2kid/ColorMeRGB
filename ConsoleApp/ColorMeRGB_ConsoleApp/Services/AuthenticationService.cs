@@ -38,7 +38,7 @@ namespace Services
         {
             var users = uDal.UsersGetByUserName(username);
             id = new Guid();
-            if (users.Count < 0) 
+            if (users.Count <= 0) 
             {
                 return false;
             }

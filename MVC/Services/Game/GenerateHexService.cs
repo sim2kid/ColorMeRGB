@@ -18,9 +18,9 @@ namespace Services.Game
         public string GenerateRandomHex()
         {
             //Generate the 3 random RGB values
-            int r = rand.Next(0, 255);
-            int g = rand.Next(0, 255);
-            int b = rand.Next(0, 255);
+            int r = rand.Next(0, 256);
+            int g = rand.Next(0, 256);
+            int b = rand.Next(0, 256);
 
             //Use the adapter to turn it into a hex value
             IHex hex = new ColorAdapter(new RGBModel(r, g, b));
